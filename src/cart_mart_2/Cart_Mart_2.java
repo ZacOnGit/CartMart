@@ -45,7 +45,7 @@ public class Cart_Mart_2 {
         //constructor for filtering InventorySort(<ItemList>,<int>,"<String>").list
         //codes for <int>: 1: name, 2: category, 3: price
         //filtering <String>: "<category name>(is case sensitive)", "<search name>(not case sensitive)"
-        ItemList newList = new InventorySort(inventory,1,"a").filteredList;
+        ItemList newList = new InventorySort(inventory,1,"b").filteredList;
         
         //saveList() will update the list on the server and print it to the screen 
         //System.out.println(newList.getCount());
