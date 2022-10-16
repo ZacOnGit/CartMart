@@ -9,12 +9,15 @@ package cart_mart_2;
  * @author dcsv4
  */
 public class InventorySort {
+    
     public ItemList list;
     public ItemList filteredList;
+    
     InventorySort(ItemList itemList, int code){
         this.list = itemList;
         sortList(code);
     }
+    
     InventorySort(ItemList itemList, int code, String cond){
         this.list = itemList;
         filterList(code, cond);
@@ -58,7 +61,6 @@ public class InventorySort {
         }
     }
     private void filterList(int code, String cond){
-        String filter;
         switch (code){
             case 1:
                 int count1 = 0;
@@ -66,41 +68,34 @@ public class InventorySort {
                     if (list.getItem(i).getItemName().toLowerCase().contains(cond.toLowerCase()))
                         count1++;
                 }
-                //create list of size 'count2' here
                 ItemList temp = list;
-                filteredList = new ItemList(count1);
+                filteredList = new ItemList();
                 int m = 0;
                 int n = 0;
-                System.out.println(filteredList.getCount());
+                //System.out.println(filteredList.getCount());
                 while (m < count1){
                     if (temp.getItem(n).getItemName().toLowerCase().contains(cond.toLowerCase())){
-                        filteredList.setItem(temp.getItem(n),m);
-                        
+                        filteredList.addItem(temp.getItem(n));
                         n++;
                         m++;
                     }
                     else
                         n++;
-                        
                 }
-                //System.out.println(count1);
                 break;
             case 2:
                 int count2 = 0;
                 for (int i = 0; i < list.getCount(); i++){
                     if(list.getItem(i).getItemCategory().compareTo(cond)==0)
                         count2++;
-                }
-                //create list of size 'count3' here             
+                }      
                 temp = list;
-                filteredList = new ItemList(count2);
+                filteredList = new ItemList();
                 m = 0;
                 n = 0;
-                System.out.println(filteredList.getCount());
                 while (m < count2){
                     if (temp.getItem(n).getItemCategory().compareTo(cond)==0){
-                        filteredList.setItem(temp.getItem(n),m);
-                        //System.out.println(filteredList.getItem(m).getItemId());
+                        filteredList.addItem(temp.getItem(n));
                         n++;
                         m++;
                     }
@@ -108,10 +103,8 @@ public class InventorySort {
                         n++;
                 }
                 break;
+            case 3:
+                //create list of size 'count3' here 
         }
-        
-        
-        
     }
-    
 }

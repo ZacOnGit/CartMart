@@ -23,34 +23,28 @@ public class Cart_Mart_2 {
         final String url = "https://api.jsonbin.io/v3/b/63406cdf2b3499323bd6971c";
         //create a string from the depository
         var json = JsonReader.readJsonFromUrl(url);
-        //get the total number of items in the repository
-        int lastIndex = 0;
-        int count = 0;
-        while (lastIndex != -1){
-            lastIndex = json.indexOf("itemID",lastIndex);
-            if (lastIndex != -1){
-                count++;
-                lastIndex += 1;            
-            }
-        }
-        //generate the array of items from the database
-        var inventory = new ItemList(json,count);
-        //inventory.getItem(2).decreaseQty(3);
-        //inventory.saveList();   
-        //System.out.println(json);
         
+        //generate the array of items from the database
+        ItemList inventory = new ItemList(json);
+        //inventory.getItem(2).decreaseQty(3);
+    
         
         //for sorting/filtering
         //constructor for sorting InventorySort(<ItemList>,<int>).list
         //constructor for filtering InventorySort(<ItemList>,<int>,"<String>").list
         //codes for <int>: 1: name, 2: category, 3: price
         //filtering <String>: "<category name>(is case sensitive)", "<search name>(not case sensitive)"
-        ItemList newList = new InventorySort(inventory,1,"b").filteredList;
+        
+        //USE THIS TEMPLATE FOR FILTERING
+        ItemList newList = new InventorySort(inventory,1,"er").filteredList;
+        
+        //USE THIS TEMPLATE FOR SORTING
+        ItemList newList1 = new InventorySort(inventory,3).list;
+        
         
         //saveList() will update the list on the server and print it to the screen 
-        //System.out.println(newList.getCount());
         newList.saveList();
-        
+        Item testItem = newList.getItem(1);
         
     }
     
