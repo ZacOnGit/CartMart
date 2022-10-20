@@ -5,19 +5,32 @@
 package cart_mart_2;
 
 /**
- *
- * @author dcsv4
+ * InventorySort both filters and sorts a given ItemList
+ * @author david
  */
 public class InventorySort {
     
     public ItemList list;
     public ItemList filteredList;
-    
+    /**
+     * Constructor for sorting
+     * InventorySort takes a given ItemList and sorts it based on a given criteria
+     * The calling function can then access the sorted list via public reference of list
+     * @param itemList  an ItemList to be sorted
+     * @param code      what Item parameter is used to sort by 1: name, 2: category, 3: price
+     */
     InventorySort(ItemList itemList, int code){
         this.list = itemList;
         sortList(code);
     }
-    
+    /**
+     * Constructor for filtering
+     * InventorySort takes a given ItemList and filters it based on a given criteria
+     * The calling function can then access the sorted list via public reference of filteredList
+     * @param itemList  an ItemList to be sorted
+     * @param code      what Item parameter is used to sort by 1: name, 2: category, 3: price
+     * @param cond      the value used for filtering, i.e. search parameter
+     */
     InventorySort(ItemList itemList, int code, String cond){
         this.list = itemList;
         filterList(code, cond);
