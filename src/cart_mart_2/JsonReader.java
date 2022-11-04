@@ -48,6 +48,7 @@ public class JsonReader {
  /**
  * Returns a string of text created from a JSON file
  * The fileName argument must be a text file with Charset UTF-8
+ * The parsing of the file is setup for the file to be a JSON
  * 
  * @param  fileName    an absolute path to a file
  * @return jsonText    string built from JSON file   

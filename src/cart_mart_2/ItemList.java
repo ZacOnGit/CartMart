@@ -125,7 +125,7 @@ public class ItemList {
         }
     }
     
-    public void saveList() throws MalformedURLException, IOException{
+    public void saveList() /*throws MalformedURLException, IOException*/{
         String inventoryString = "{\"record\":[{\"";
         for (int i = 0; i < this.itemList.size(); i++){
             inventoryString = inventoryString + "itemID\":";
