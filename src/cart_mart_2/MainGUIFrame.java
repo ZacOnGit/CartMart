@@ -4,6 +4,7 @@
  */
 package cart_mart_2;
 
+import java.awt.Color;
 import javax.swing.ImageIcon;
 
 /**
@@ -24,9 +25,16 @@ public class MainGUIFrame extends javax.swing.JFrame {
         this.inventory = list;
     }
     public MainGUIFrame(){
-        
+        ImageIcon logo = new ImageIcon(Cart_Mart_2.class.getResource("images/cartLogo.png"));
+        this.setIconImage(logo.getImage());
+        this.setTitle("Cart Mart");
+        initComponents();
+        this.inventory = Item.inventory;
     }
-
+    public void turnOn(){
+        this.getContentPane().setBackground(Color.black);
+        this.setVisible(true);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

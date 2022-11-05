@@ -31,8 +31,17 @@ public class Cart_Mart_2 {
         json = json.replaceAll("\\s+", "");
         //generate the array of items from the database
         ItemList inventory = new ItemList(json);
+        Item.inventory = inventory;
         //inventory.getItem(2).decreaseQty(3);
+        
+        /*
         MainGUIFrame frame = new MainGUIFrame(inventory);
+        frame.getContentPane().setBackground(Color.black);
+        frame.setVisible(true);
+        */
+        MainGUIFrame panel = new MainGUIFrame();
+        
+        loginView frame = new loginView();
         frame.getContentPane().setBackground(Color.black);
         frame.setVisible(true);
         //for sorting/filtering

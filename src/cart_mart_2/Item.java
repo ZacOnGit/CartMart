@@ -16,6 +16,7 @@ public class Item {
     private int itemQuantity;
     private final String itemDescription;
     private final String itemImage;
+    public static ItemList inventory;
 
  /**
  * Constructor
