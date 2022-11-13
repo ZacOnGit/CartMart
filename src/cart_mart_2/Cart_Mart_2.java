@@ -6,9 +6,9 @@ package cart_mart_2;
 
 import java.awt.Color;
 
-
 /**
  * Cart Mart main
+ *
  * @author david
  */
 public class Cart_Mart_2 {
@@ -18,8 +18,7 @@ public class Cart_Mart_2 {
      * @throws java.lang.Exception
      */
     public static void main(String[] args) throws Exception {
-        
-        
+
         final String file = "inventoryList.json";
         //url for the database
         final String url = "https://api.jsonbin.io/v3/b/63406cdf2b3499323bd6971c";
@@ -33,14 +32,14 @@ public class Cart_Mart_2 {
         ItemList inventory = new ItemList(json);
         Item.inventory = inventory;
         //inventory.getItem(2).decreaseQty(3);
-        
+
         /*
         MainGUIFrame frame = new MainGUIFrame(inventory);
         frame.getContentPane().setBackground(Color.black);
         frame.setVisible(true);
-        */
+         */
         MainGUIFrame panel = new MainGUIFrame();
-        
+
         loginView frame = new loginView();
         frame.getContentPane().setBackground(Color.black);
         frame.setVisible(true);
@@ -49,12 +48,11 @@ public class Cart_Mart_2 {
         //constructor for filtering InventorySort(<ItemList>,<int>,"<String>").list
         //codes for <int>: 1: name, 2: category, 3: price
         //filtering <String>: "<category name>(is case sensitive)", "<search name>(not case sensitive)"
-        
+
         //USE THIS TEMPLATE FOR FILTERING
         //ItemList newList = new InventorySort(inventory,1,"er").filteredList;
         //USE THIS TEMPLATE FOR SORTING
         //ItemList newList1 = new InventorySort(inventory,3).list;
-        
         //saveList() will update the list on the server and print it to the screen 
         //newList.saveList();
         //Item testItem = newList.getItem(1);
