@@ -208,7 +208,7 @@ public class loginView extends javax.swing.JFrame {
                 WelcomePage welcome = new WelcomePage();
                 welcome.setVisible(true);
                 this.setVisible(false);
-                
+                //System.out.println(User.getLine());
             }
             else
                 JOptionPane.showMessageDialog(this,"unsuccessful");
@@ -237,6 +237,9 @@ public class loginView extends javax.swing.JFrame {
                 data = currentLine.split(delimiter);
                 if (data[3].equals(tempU) && data[4].equals(tempP))
                         {
+                            User.setLine(Integer.valueOf(data[0]));
+                            fr.close();
+                            br.close();
                             return true;
                         }
             }

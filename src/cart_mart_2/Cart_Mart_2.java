@@ -5,6 +5,10 @@
 package cart_mart_2;
 
 import java.awt.Color;
+import javax.swing.BoxLayout;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  * Cart Mart main
@@ -21,13 +25,16 @@ public class Cart_Mart_2 {
 
         final String file = "inventoryList.json";
         //url for the database
-        final String url = "https://api.jsonbin.io/v3/b/63406cdf2b3499323bd6971c";
+        //final String url = "https://api.jsonbin.io/v3/b/63406cdf2b3499323bd6971c";
         //create a string from the depository
         //var json = JsonReader.readJsonFromUrl(url);
         //create a string from a file - if we go that route        
         var json = JsonReader.readJsonFromFile(file);
+        
         //the replaceAll function call is needed to remove whitespaces from the string
-        json = json.replaceAll("\\s+", "");
+        json = json.replaceAll("\\s+", " ");
+        //System.out.println(json);
+        //json = json.replace("\n", "");
         //generate the array of items from the database
         ItemList inventory = new ItemList(json);
         Item.inventory = inventory;
@@ -38,10 +45,16 @@ public class Cart_Mart_2 {
         frame.getContentPane().setBackground(Color.black);
         frame.setVisible(true);
          */
-        MainGUIFrame panel = new MainGUIFrame();
-
-        loginView frame = new loginView();
-        frame.getContentPane().setBackground(Color.black);
+        MainGUIFrame frame = new MainGUIFrame();
+        //JFrame frame = new JFrame();
+        //ViewItems itemPanel = new ViewItems();
+        //itemPanel.viewItemResults(inventory);
+        //JScrollPane scrPane = new JScrollPane(itemPanel);
+        //loginView frame = new loginView();
+        //frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        //frame.getContentPane().setBackground(Color.black);
+        //frame.add(scrPane);
+        //itemPanel.setVisible(true);
         frame.setVisible(true);
         //for sorting/filtering
         //constructor for sorting InventorySort(<ItemList>,<int>).list
@@ -55,6 +68,8 @@ public class Cart_Mart_2 {
         //ItemList newList1 = new InventorySort(inventory,3).list;
         //saveList() will update the list on the server and print it to the screen 
         //newList.saveList();
+        //inventory.saveList();
         //Item testItem = newList.getItem(1);
+        //System.out.println(User.getLine());
     }
 }

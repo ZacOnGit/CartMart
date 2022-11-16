@@ -13,10 +13,11 @@ import java.util.ArrayList;
 public class User {
 
     private String name;
-    private String address;
     private String userName;
     private String passWord;
+    private String address = "no address";
     private ArrayList<ItemList> orderHistory;
+    private static int outputFileLine;
 
     public void createUser() {
 
@@ -24,5 +25,11 @@ public class User {
 
     public void saveToHistory() {
 
+    }
+    public static void setLine(int number){
+        outputFileLine = number;
+    }
+    public static int getLine(){
+        return outputFileLine;
     }
 }

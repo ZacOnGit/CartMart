@@ -6,6 +6,8 @@ package cart_mart_2;
 
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -22,6 +24,7 @@ public class MainGUIFrame extends javax.swing.JFrame {
         this.setIconImage(logo.getImage());
         this.setTitle("Cart Mart");
         initComponents();
+        
         this.inventory = list;
     }
     public MainGUIFrame(){
@@ -29,7 +32,13 @@ public class MainGUIFrame extends javax.swing.JFrame {
         this.setIconImage(logo.getImage());
         this.setTitle("Cart Mart");
         initComponents();
-        this.inventory = Item.inventory;
+        ViewItems itemPanel = new ViewItems();
+        itemPanel.viewItemResults(Item.inventory);
+        viewPanel.setBackground(Color.GREEN);
+        viewPanel.setViewportView(itemPanel);
+        viewPanel.setVisible(true);
+        itemPanel.setVisible(true);
+        
     }
     public void turnOn(){
         this.getContentPane().setBackground(Color.black);
@@ -55,7 +64,7 @@ public class MainGUIFrame extends javax.swing.JFrame {
         searchBar = new javax.swing.JTextField();
         goButton = new javax.swing.JButton();
         accountButton = new javax.swing.JButton();
-        viewPanel = new javax.swing.JPanel();
+        viewPanel = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -132,9 +141,6 @@ public class MainGUIFrame extends javax.swing.JFrame {
 
         goButton.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 18)); // NOI18N
         goButton.setText("GO!");
-        goButton.setMaximumSize(new java.awt.Dimension(72, 27));
-        goButton.setMinimumSize(new java.awt.Dimension(72, 27));
-        goButton.setPreferredSize(new java.awt.Dimension(72, 27));
         goButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 goButtonMouseClicked(evt);
@@ -155,30 +161,19 @@ public class MainGUIFrame extends javax.swing.JFrame {
 
         viewPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout viewPanelLayout = new javax.swing.GroupLayout(viewPanel);
-        viewPanel.setLayout(viewPanelLayout);
-        viewPanelLayout.setHorizontalGroup(
-            viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 703, Short.MAX_VALUE)
-        );
-        viewPanelLayout.setVerticalGroup(
-            viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 467, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(navPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(viewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(navPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE)
+            .addComponent(viewPanel)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(navPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(viewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(viewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE))
         );
 
         pack();
@@ -259,7 +254,7 @@ public class MainGUIFrame extends javax.swing.JFrame {
     private javax.swing.JLabel searchLabel;
     private javax.swing.JLabel sortLabel;
     private javax.swing.JComboBox<String> sortMenu;
-    private javax.swing.JPanel viewPanel;
+    private javax.swing.JScrollPane viewPanel;
     private javax.swing.JLabel welcomLabel;
     // End of variables declaration//GEN-END:variables
 }

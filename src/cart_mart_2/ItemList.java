@@ -80,7 +80,7 @@ public class ItemList {
                     c = json.charAt(temp);
                 }
                 lastIndex = json.indexOf("itemName", lastIndex);
-                temp = lastIndex + 11;
+                temp = lastIndex + 12;
                 c = json.charAt(temp);
                 while (c != '"') {
                     name = name + String.valueOf(c);
@@ -88,7 +88,7 @@ public class ItemList {
                     c = json.charAt(temp);
                 }
                 lastIndex = json.indexOf("itemCategory", lastIndex);
-                temp = lastIndex + 15;
+                temp = lastIndex + 16;
                 c = json.charAt(temp);
                 while (c != '"') {
                     category = category + String.valueOf(c);
@@ -112,7 +112,7 @@ public class ItemList {
                     c = json.charAt(temp);
                 }
                 lastIndex = json.indexOf("itemDesc", lastIndex);
-                temp = lastIndex + 11;
+                temp = lastIndex + 12;
                 c = json.charAt(temp);
                 while (c != '"') {
                     desc = desc + String.valueOf(c);
@@ -120,6 +120,9 @@ public class ItemList {
                     c = json.charAt(temp);
                 }
                 lastIndex += "itemDesc".length();
+                id = id.replace(" ", "");
+                price = price.replace(" ", "");
+                qty = qty.replace(" ", "");
                 Item newItem = new Item(Integer.valueOf(id), name, category, Integer.valueOf(price), Integer.valueOf(qty), desc);
                 itemList.add(newItem);
                 listCount++;
