@@ -27,7 +27,7 @@ public class ItemList {
     private int listCount;
     private final ArrayList<Item> itemList;
 
-    ItemList(String json) {
+    public ItemList(String json) {
         itemList = new ArrayList<>();
         listCount = 0;
         createList(json);
@@ -55,7 +55,20 @@ public class ItemList {
             return this.itemList.get(value);
         }
     }
-
+    
+    public Item getItem(String name){
+        if(name == null){
+            return null;
+        }
+        for(int i = 0; i < itemList.size(); i++){
+            Item temp = itemList.get(i);
+            if(temp.getItemName().equals(name)){
+                return temp;
+            }
+        }
+        return null;
+    }
+    
     public void addItem(Item item) {
         this.itemList.add(item);
         listCount++;

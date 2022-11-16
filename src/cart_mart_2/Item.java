@@ -84,6 +84,13 @@ public class Item {
      */
     public int getItemQuantity(){
         return this.itemQuantity;
+    }/**
+     * setItemQuantity changes the itemQuantity to the passed in value
+     * @param value - the value to change the quantity to
+     */
+    
+    public void setItemQuantity(int value) {
+        this.itemQuantity = value;
     }
     /**
      * getItemDescription returns the description for an item
