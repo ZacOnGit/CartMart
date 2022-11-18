@@ -28,10 +28,11 @@ public class ManagerView extends javax.swing.JFrame {
      */
     public ManagerView() throws Exception{
         initComponents();
+        
+        //Retrieve inventory from json file and fill in combo box options
         final String file = "inventoryList.json";
         var json = JsonReader.readJsonFromFile(file);
         json = json.replaceAll("\\s+", "");
-        System.out.println(json);
         inventory = new ItemList(json);
         inventory.saveList();
         for(int i = 0; i < inventory.getCount(); i++) {
@@ -373,11 +374,14 @@ public class ManagerView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addItemButtonActionPerformed
-            contentPanel.setVisible(false);
-            addItemPanel.setVisible(true);
+        // reverse visibility of panels to bring up Add Item menu
+        contentPanel.setVisible(false);
+        addItemPanel.setVisible(true);
     }//GEN-LAST:event_addItemButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        // Update by generating a new json file
+        // TODO: overwrite the real json
         String newJson = "[\n";
         for(int i = 0; i < inventory.getCount(); i++){
             Item item = inventory.getItem(i);
@@ -396,7 +400,6 @@ public class ManagerView extends javax.swing.JFrame {
         }
         newJson += "]";
         try {
-            //        File file = new File("inventoryList.json");
             FileWriter file = new FileWriter("inventoryListTest.json");
             file.write(newJson);
             file.close();
@@ -406,19 +409,20 @@ public class ManagerView extends javax.swing.JFrame {
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
-        this.dispose();
+        this.dispose(); // close the application
     }//GEN-LAST:event_closeButtonActionPerformed
 
     private void itemComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemComboBoxActionPerformed
+        // Retrieve item information and fill in GUI components
         Item item = inventory.getItem(itemComboBox.getSelectedItem().toString());
         this.itemPriceTextField.setValue(item.getItemPrice());
-        System.out.println(itemComboBox.getSelectedItem().toString() + " qty: " + item.getItemQuantity());
         this.itemCountSpinner.setValue((Integer) item.getItemQuantity());
         this.categoryTextField.setText(item.getItemCategory());
         this.descriptionTextField.setText(item.getItemDescription());
     }//GEN-LAST:event_itemComboBoxActionPerformed
 
     private void itemCountSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_itemCountSpinnerStateChanged
+        // Change currently selected item's quantity
         try {
             this.itemCountSpinner.commitEdit();
         } catch (ParseException ex) {
@@ -428,6 +432,7 @@ public class ManagerView extends javax.swing.JFrame {
     }//GEN-LAST:event_itemCountSpinnerStateChanged
 
     private void addToInventoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToInventoryButtonActionPerformed
+        // Create new item with filled in GUI component values and add it to the inventory
         Item newItem = new Item(itemComboBox.getItemCount()+1, 
                 itemNameTextField.getText(), 
                 itemCategoryTextField.getText(), 
@@ -439,6 +444,7 @@ public class ManagerView extends javax.swing.JFrame {
     }//GEN-LAST:event_addToInventoryButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        // Reverse visibility of panels
         addItemPanel.setVisible(false);
         contentPanel.setVisible(true);
     }//GEN-LAST:event_cancelButtonActionPerformed
