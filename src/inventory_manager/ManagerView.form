@@ -301,10 +301,7 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="itemDescriptionLabel" min="-2" max="-2" attributes="0"/>
-                              <Component id="itemImageLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="itemDescriptionLabel" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -323,10 +320,7 @@
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="descriptionTextField1" alignment="0" pref="175" max="32767" attributes="0"/>
-                              <Component id="itemImageTextField" alignment="0" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="descriptionTextField1" min="-2" pref="175" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="addToInventoryButton" max="32767" attributes="0"/>
@@ -375,11 +369,7 @@
                       <Component id="addToInventoryButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="itemImageLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="itemImageTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="cancelButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="97" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -445,16 +435,6 @@
         <Component class="javax.swing.JTextField" name="itemCategoryTextField">
         </Component>
         <Component class="javax.swing.JTextField" name="descriptionTextField1">
-        </Component>
-        <Component class="javax.swing.JLabel" name="itemImageLabel">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="14" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Item Image:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="itemImageTextField">
         </Component>
         <Component class="javax.swing.JLabel" name="addItemHeaderLabel">
           <Properties>

@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JInternalFrame;
 
 /**
  *
@@ -28,11 +27,11 @@ public class ManagerView extends javax.swing.JFrame {
      */
     public ManagerView() throws Exception{
         initComponents();
-        
+        addItemPanel.setVisible(false);
         //Retrieve inventory from json file and fill in combo box options
-        final String file = "inventoryList.json";
+        final String file = "src/cart_mart_2/resources/inventoryList.json";
         var json = JsonReader.readJsonFromFile(file);
-        json = json.replaceAll("\\s+", "");
+        json = json.replaceAll("\\s+", " ");
         inventory = new ItemList(json);
         inventory.saveList();
         for(int i = 0; i < inventory.getCount(); i++) {
@@ -75,8 +74,6 @@ public class ManagerView extends javax.swing.JFrame {
         itemPriceTextField1 = new javax.swing.JFormattedTextField();
         itemCategoryTextField = new javax.swing.JTextField();
         descriptionTextField1 = new javax.swing.JTextField();
-        itemImageLabel = new javax.swing.JLabel();
-        itemImageTextField = new javax.swing.JTextField();
         addItemHeaderLabel = new javax.swing.JLabel();
         addToInventoryButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
@@ -241,9 +238,6 @@ public class ManagerView extends javax.swing.JFrame {
 
         itemPriceTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
-        itemImageLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        itemImageLabel.setText("Item Image:");
-
         addItemHeaderLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         addItemHeaderLabel.setText("Add Item to Inventory");
 
@@ -276,9 +270,7 @@ public class ManagerView extends javax.swing.JFrame {
                             .addComponent(priceLabel)))
                     .addGroup(addItemPanelLayout.createSequentialGroup()
                         .addGap(17, 17, 17)
-                        .addGroup(addItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(itemDescriptionLabel)
-                            .addComponent(itemImageLabel)))
+                        .addComponent(itemDescriptionLabel))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addItemPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(itemCategoryLabel)))
@@ -292,9 +284,7 @@ public class ManagerView extends javax.swing.JFrame {
                             .addComponent(itemPriceTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(addItemPanelLayout.createSequentialGroup()
-                        .addGroup(addItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(descriptionTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                            .addComponent(itemImageTextField, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addComponent(descriptionTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(addItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(addToInventoryButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -332,10 +322,7 @@ public class ManagerView extends javax.swing.JFrame {
                     .addComponent(descriptionTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addToInventoryButton))
                 .addGap(18, 18, 18)
-                .addGroup(addItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(itemImageLabel)
-                    .addComponent(itemImageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cancelButton))
+                .addComponent(cancelButton)
                 .addContainerGap(97, Short.MAX_VALUE))
         );
 
@@ -391,7 +378,7 @@ public class ManagerView extends javax.swing.JFrame {
             newJson += "   \"itemPrice\": " + item.getItemPrice() + ",\n";
             newJson += "   \"itemQty\": " + item.getItemQuantity() + ",\n";
             newJson += "   \"itemDesc\": \"" + item.getItemDescription() + "\",\n";
-            newJson += "   \"itemImage\": " + item.getItemImage() + ",\n";
+            newJson += "   \"itemImage\": " + item.getItemImage().split(".jpg")[0] + "\n";
             if(i == inventory.getCount()-1){
                 newJson+= " }\n";
             } else {
@@ -400,7 +387,7 @@ public class ManagerView extends javax.swing.JFrame {
         }
         newJson += "]";
         try {
-            FileWriter file = new FileWriter("inventoryListTest.json");
+            FileWriter file = new FileWriter("src/cart_mart_2/resources/inventoryList.json");
             file.write(newJson);
             file.close();
         } catch (IOException ex) {
@@ -433,7 +420,14 @@ public class ManagerView extends javax.swing.JFrame {
 
     private void addToInventoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToInventoryButtonActionPerformed
         // Create new item with filled in GUI component values and add it to the inventory
-        Item newItem = new Item(itemComboBox.getItemCount()+1, 
+        int id = 0;
+        for(int i = 0; i < inventory.getCount(); i++){
+            int tempId = inventory.getItem(i).getItemId();
+            if(tempId > id){
+                id = tempId +1;
+            }
+        }
+        Item newItem = new Item(id, 
                 itemNameTextField.getText(), 
                 itemCategoryTextField.getText(), 
                 ((Long) itemPriceTextField1.getValue()).intValue(), 
@@ -511,8 +505,6 @@ public class ManagerView extends javax.swing.JFrame {
     private javax.swing.JLabel itemCountLabel;
     private javax.swing.JSpinner itemCountSpinner;
     private javax.swing.JLabel itemDescriptionLabel;
-    private javax.swing.JLabel itemImageLabel;
-    private javax.swing.JTextField itemImageTextField;
     private javax.swing.JTextField itemNameTextField;
     private javax.swing.JLabel itemPriceLabel;
     private javax.swing.JFormattedTextField itemPriceTextField;
