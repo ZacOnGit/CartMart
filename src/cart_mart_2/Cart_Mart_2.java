@@ -45,7 +45,8 @@ public class Cart_Mart_2 {
         frame.getContentPane().setBackground(Color.black);
         frame.setVisible(true);
          */
-        MainGUIFrame frame = new MainGUIFrame();
+        //MainGUIFrame frame = new MainGUIFrame();
+        loginView frame = new loginView();
         //JFrame frame = new JFrame();
         //ViewItems itemPanel = new ViewItems();
         //itemPanel.viewItemResults(inventory);
