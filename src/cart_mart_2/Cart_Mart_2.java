@@ -23,7 +23,7 @@ public class Cart_Mart_2 {
      */
     public static void main(String[] args) throws Exception {
 
-        final String file = "inventoryList.json";
+        final String file = "src/cart_mart_2/resources/inventoryList.json";
         //url for the database
         //final String url = "https://api.jsonbin.io/v3/b/63406cdf2b3499323bd6971c";
         //create a string from the depository
