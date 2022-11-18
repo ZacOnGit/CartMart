@@ -23,11 +23,18 @@ public class MainGUIFrame extends javax.swing.JFrame {
         ImageIcon logo = new ImageIcon(Cart_Mart_2.class.getResource("images/cartLogo.png"));
         this.setIconImage(logo.getImage());
         this.setTitle("Cart Mart");
-        initComponents();
-        
         this.inventory = list;
+        initComponents();
+        ViewItems itemPanel = new ViewItems();
+        itemPanel.viewItemResults(list);
+        viewPanel.setBackground(Color.GREEN);
+        viewPanel.setViewportView(itemPanel);
+        viewPanel.setVisible(true);
+        itemPanel.setVisible(true);
+        
     }
     public MainGUIFrame(){
+        this.inventory = Item.inventory;
         ImageIcon logo = new ImageIcon(Cart_Mart_2.class.getResource("images/cartLogo.png"));
         this.setIconImage(logo.getImage());
         this.setTitle("Cart Mart");
@@ -38,6 +45,8 @@ public class MainGUIFrame extends javax.swing.JFrame {
         viewPanel.setViewportView(itemPanel);
         viewPanel.setVisible(true);
         itemPanel.setVisible(true);
+        //ItemList newList = new InventorySort(inventory,1,"er").filteredList;
+        //newList.saveList();
         
     }
     public void turnOn(){
@@ -189,9 +198,20 @@ public class MainGUIFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         //search bar, updates every key release
         System.out.println(String.valueOf(searchBar.getText()));
-        cartCountLabel.setText(String.valueOf(searchBar.getText()));
+        //cartCountLabel.setText(String.valueOf(searchBar.getText()));
+        
         ItemList newList = new InventorySort(inventory,1,String.valueOf(searchBar.getText())).filteredList;
-        newList.saveList();
+        //newList.saveList();
+        //MainGUIFrame frame = new MainGUIFrame(newList);
+        //frame.searchBar.setText(this.searchBar.getText());
+        //this.setVisible(false);
+        //frame.setVisible(true);
+        viewPanel.setVisible(false);
+        ViewItems itemPanel = new ViewItems();
+        itemPanel.viewItemResults(newList);
+        viewPanel.setViewportView(itemPanel);
+        viewPanel.setVisible(true);
+        itemPanel.setVisible(true);
         /*try{
             newList.saveList();
         }

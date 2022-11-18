@@ -33,9 +33,13 @@ public class InventorySort {
      */
     InventorySort(ItemList itemList, int code, String cond){
         this.list = itemList;
+        //System.out.println(Item.inventory.getCount());
         filterList(code, cond);
     }
-    
+    /**
+     * 
+     * @param val 
+     */
     private void sortList(int val){
         switch (val){
             case 1:
@@ -74,9 +78,11 @@ public class InventorySort {
         }
     }
     private void filterList(int code, String cond){
+        
         switch (code){
             case 1:
                 int count1 = 0;
+                
                 for (int i = 0; i < list.getCount(); i++){
                     if (list.getItem(i).getItemName().toLowerCase().contains(cond.toLowerCase()))
                         count1++;

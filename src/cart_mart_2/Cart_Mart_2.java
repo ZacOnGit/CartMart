@@ -23,14 +23,13 @@ public class Cart_Mart_2 {
      */
     public static void main(String[] args) throws Exception {
 
-        final String file = "inventoryList.json";
+        final String file = "src/cart_mart_2/resources/inventoryList.json";
         //url for the database
         //final String url = "https://api.jsonbin.io/v3/b/63406cdf2b3499323bd6971c";
         //create a string from the depository
         //var json = JsonReader.readJsonFromUrl(url);
         //create a string from a file - if we go that route        
         var json = JsonReader.readJsonFromFile(file);
-        
         //the replaceAll function call is needed to remove whitespaces from the string
         json = json.replaceAll("\\s+", " ");
         //System.out.println(json);
@@ -45,6 +44,7 @@ public class Cart_Mart_2 {
         frame.getContentPane().setBackground(Color.black);
         frame.setVisible(true);
          */
+        //loginView frame = new loginView();
         MainGUIFrame frame = new MainGUIFrame();
         //JFrame frame = new JFrame();
         //ViewItems itemPanel = new ViewItems();
