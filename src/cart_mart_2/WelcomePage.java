@@ -4,6 +4,8 @@
  */
 package cart_mart_2;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Krina
@@ -14,6 +16,9 @@ public class WelcomePage extends javax.swing.JFrame {
      * Creates new form WelcomePage
      */
     public WelcomePage() {
+        ImageIcon logo = new ImageIcon(Cart_Mart_2.class.getResource("images/cartLogo.png"));
+        this.setIconImage(logo.getImage());
+        this.setTitle("Cart Mart");
         initComponents();
     }
 
@@ -141,16 +146,18 @@ public class WelcomePage extends javax.swing.JFrame {
 
     private void PickUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PickUpActionPerformed
         // TODO add your handling code here:
-        PickUp pick_up = new PickUp();
-        pick_up.setVisible(true);
-        this.setVisible(false);
+        Cart_Mart_2.changeView(7, 6);
+        //PickUp pick_up = new PickUp();
+        //pick_up.setVisible(true);
+        //this.setVisible(false);
     }//GEN-LAST:event_PickUpActionPerformed
 
     private void Delivery1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Delivery1ActionPerformed
         // TODO add your handling code here:
-        Delivery_Info delivery = new Delivery_Info();
-        delivery.setVisible(true);
-        this.setVisible(false);
+        Cart_Mart_2.changeView(8, 6);
+        //Delivery_Info delivery = new Delivery_Info();
+        //delivery.setVisible(true);
+        //this.setVisible(false);
     }//GEN-LAST:event_Delivery1ActionPerformed
 
     /**

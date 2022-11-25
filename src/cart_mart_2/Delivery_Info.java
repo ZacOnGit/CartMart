@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,6 +26,9 @@ public class Delivery_Info extends javax.swing.JFrame {
      * Creates new form Delivery_Info
      */
     public Delivery_Info() {
+        ImageIcon logo = new ImageIcon(Cart_Mart_2.class.getResource("images/cartLogo.png"));
+        this.setIconImage(logo.getImage());
+        this.setTitle("Cart Mart");
         initComponents();
     }
     
@@ -223,9 +227,11 @@ public class Delivery_Info extends javax.swing.JFrame {
                 else{
                     data();
                 JOptionPane.showMessageDialog(this,"successful");
-                WelcomePage welcome = new WelcomePage();
-                welcome.setVisible(true);
-                this.setVisible(false);
+                User.setContact(AddressName.getText(),PhoneNumber.getText());
+                Cart_Mart_2.changeView(1,8);
+                //WelcomePage welcome = new WelcomePage();
+                //welcome.setVisible(true);
+                //this.setVisible(false);
                 }
                 
             }

@@ -4,18 +4,24 @@
  */
 package cart_mart_2;
 
+import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 /**
  *
  * @author dcsv4
  */
 public class ItemPanel extends JPanel{
-    public ItemPanel(int itemNum, String itemName, String itemDesc, int itemPrice){
+    int itemQuantity;
+    public static int cartCount = 0;
+    private static Order order;
+    public ItemPanel(int itemNum, String itemName, String itemDesc, int itemPrice, int itemQty, int orderQty){
         JLabel image = new javax.swing.JLabel();
         JLabel name = new javax.swing.JLabel();
         JLabel description = new javax.swing.JLabel();
@@ -24,7 +30,12 @@ public class ItemPanel extends JPanel{
         JButton incButton = new javax.swing.JButton();
         JButton decButton = new javax.swing.JButton();
         JButton addToCart = new javax.swing.JButton();
-        
+        JLabel lineTotal = new javax.swing.JLabel();
+        lineTotal.setVisible(false);
+        this.setBackground(Color.WHITE);
+        itemQuantity = itemQty;
+        if (order == null)
+            order = new Order();
         try{
             ImageIcon pic = new ImageIcon(Cart_Mart_2.class.getResource("images/"+String.valueOf(itemNum)+".jpg"));
             image.setIcon(pic);
@@ -50,7 +61,7 @@ public class ItemPanel extends JPanel{
         description.setPreferredSize(new java.awt.Dimension(160, 20));
         description.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 18));
         price.setText("$"+String.format("%.2f", (float)itemPrice/100.0));
-        quantity.setText("0");
+        quantity.setText(String.valueOf(orderQty));
         incButton.setText("+");
         decButton.setText("-");
         addToCart.setText("ADD");
@@ -58,11 +69,24 @@ public class ItemPanel extends JPanel{
         incButton.setPreferredSize(new java.awt.Dimension(41, 30));
         decButton.setPreferredSize(new java.awt.Dimension(41, 30));
         addToCart.setPreferredSize(new java.awt.Dimension(60, 30));
+        lineTotal.setPreferredSize(new java.awt.Dimension(60, 30));
         quantity.setPreferredSize(new java.awt.Dimension(50, 30));
         quantity.setHorizontalAlignment(JTextField.CENTER);
         quantity.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 18));
         price.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 18));
         
+        if (Cart_Mart_2.inCart){
+            addToCart.setPreferredSize(new java.awt.Dimension(80, 30));
+            addToCart.setText("Update");
+        }
+        if (Cart_Mart_2.inReceipt){
+            incButton.setVisible(false);
+            decButton.setVisible(false);
+            addToCart.setVisible(false);
+            lineTotal.setText(String.valueOf(25));
+            
+            lineTotal.setVisible(true);
+        }
         incButton.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -73,6 +97,30 @@ public class ItemPanel extends JPanel{
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 quantity.setText(String.valueOf(decButtonMouseClicked(evt, Integer.valueOf(quantity.getText()))));
+            }
+        });
+        addToCart.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) { 
+                //System.out.println(itemNum);
+                if (Integer.valueOf(quantity.getText()) != 0){
+                    Boolean itemInCart = false;
+                    for (int i = 0; i < order.itemIdList.size(); i++){
+                        if (order.itemIdList.get(i) == itemNum){
+                                itemInCart = true;
+                                order.qtyList.set(i, Integer.valueOf(quantity.getText()));
+                        }                        
+                    }
+                    if (!itemInCart){
+                        cartCount++;
+                        order.itemIdList.add(itemNum);
+                        order.qtyList.add(Integer.valueOf(quantity.getText()));
+                    }  
+                }            
+                if (!Cart_Mart_2.inCart){
+                    Cart_Mart_2.refresh(cartCount);
+                    //quantity.setText(String.valueOf(0));
+                }
             }
         });
         
@@ -98,7 +146,7 @@ public class ItemPanel extends JPanel{
                         .addComponent(quantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(decButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)   
                         .addComponent(addToCart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(23, Short.MAX_VALUE))))
         );
@@ -125,6 +173,10 @@ public class ItemPanel extends JPanel{
     }
     
     private int incButtonMouseClicked(java.awt.event.MouseEvent evt, int num){
+        if (num == itemQuantity){
+            JOptionPane.showMessageDialog(null, String.valueOf(num)+" is the maximum allowed.");
+            return num;
+        }            
         num++;
         return num;            
     }

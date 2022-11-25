@@ -12,15 +12,26 @@ import java.util.ArrayList;
  */
 public class User {
 
-    private String name;
-    private String userName;
-    private String passWord;
-    private String address = "no address";
-    private ArrayList<ItemList> orderHistory;
+    public static String receiptName = "";
+    private static String firstName = "David";
+    private static String lastName = "David";
+    public static Boolean guest = true;
+    private static String userName;
+    private static String passWord;
+    private static String address = "no address";
+    private static String phone = "no phone";
+    private static ArrayList<ItemList> orderHistory;
     private static int outputFileLine;
+    public static Boolean delivery = false;
 
-    public void createUser() {
-
+    public static void createUser(String fn, String ln, String un, String pw) {
+        firstName = fn;
+        lastName = ln;
+        guest = false;
+        userName = un;
+        passWord = pw;
+        if (!guest) 
+            receiptName = firstName;
     }
 
     public void saveToHistory() {
@@ -31,5 +42,9 @@ public class User {
     }
     public static int getLine(){
         return outputFileLine;
+    }
+    public static void setContact(String a, String p){
+        address = a;
+        phone = p;
     }
 }

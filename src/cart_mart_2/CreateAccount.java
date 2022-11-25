@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,6 +26,9 @@ public class CreateAccount extends javax.swing.JFrame {
      * Creates new form CreateAccount
      */
     public CreateAccount() {
+        ImageIcon logo = new ImageIcon(Cart_Mart_2.class.getResource("images/cartLogo.png"));
+        this.setIconImage(logo.getImage());
+        this.setTitle("Cart Mart");
         initComponents();
     }
     
@@ -228,9 +232,11 @@ public class CreateAccount extends javax.swing.JFrame {
                 else{
                     data();
                 JOptionPane.showMessageDialog(this,"successful");
-                WelcomePage welcome = new WelcomePage();
-                welcome.setVisible(true);
-                this.setVisible(false);
+                User.createUser(txtFirstName.getText(),txtLastName.getText(),txtNewUsername.getText(),txtNewUsername.getText()); 
+                //Cart_Mart_2.changeView(6,4);
+                //WelcomePage welcome = new WelcomePage();
+                //welcome.setVisible(true);
+                //this.setVisible(false);
                 }
                 
             }

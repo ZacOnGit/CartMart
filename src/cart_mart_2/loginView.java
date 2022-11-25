@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,6 +23,9 @@ public class loginView extends javax.swing.JFrame {
      * Creates new form loginView
      */
     public loginView() {
+        ImageIcon logo = new ImageIcon(Cart_Mart_2.class.getResource("images/cartLogo.png"));
+        this.setIconImage(logo.getImage());
+        this.setTitle("Cart Mart");
         initComponents();
     }
 
@@ -234,9 +238,10 @@ public class loginView extends javax.swing.JFrame {
             if (user_info() == true)
             { 
                 JOptionPane.showMessageDialog(this,"successful");
-                WelcomePage welcome = new WelcomePage();
-                welcome.setVisible(true);
-                this.setVisible(false);
+                Cart_Mart_2.changeView(6,5);
+                //WelcomePage welcome = new WelcomePage();
+                //welcome.setVisible(true);
+                //this.setVisible(false);
                 
             }
             else
@@ -278,16 +283,19 @@ public class loginView extends javax.swing.JFrame {
     
     private void create_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_buttonActionPerformed
         // TODO add your handling code here:
-        CreateAccount new_account = new CreateAccount();
-        new_account.setVisible(true);
-        this.setVisible(false);
+        Cart_Mart_2.changeView(4, 5);
+        //CreateAccount new_account = new CreateAccount();
+        //new_account.setVisible(true);
+        //this.setVisible(false);
     }//GEN-LAST:event_create_buttonActionPerformed
 
     private void continue_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continue_buttonActionPerformed
         // TODO add your handling code here:
-        WelcomePage welcome = new WelcomePage();
-        welcome.setVisible(true);
-        this.setVisible(false);
+        Cart_Mart_2.changeView(6,5);
+        
+        //WelcomePage welcome = new WelcomePage();
+        //welcome.setVisible(true);
+        //this.setVisible(false);
         
        // MainGUIFrame welcome = new MainGUIFrame();
        // welcome.setVisible(true);
