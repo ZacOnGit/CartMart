@@ -31,21 +31,102 @@ public class WelcomePage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        navPanel = new javax.swing.JPanel();
+        logoLabel = new javax.swing.JLabel();
+        cartCountLabel = new javax.swing.JLabel();
+        emptyCartLabel = new javax.swing.JLabel();
+        welcomLabel = new javax.swing.JLabel();
+        sortLabel = new javax.swing.JLabel();
+        searchLabel = new javax.swing.JLabel();
+        sortMenu = new javax.swing.JComboBox<>();
+        searchBar = new javax.swing.JTextField();
+        goButton = new javax.swing.JButton();
+        accountButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         PickUp = new javax.swing.JButton();
         Delivery1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        navPanel1 = new javax.swing.JPanel();
+        logoLabel1 = new javax.swing.JLabel();
+        welcomLabel1 = new javax.swing.JLabel();
+        accountButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
+        navPanel.setBackground(new java.awt.Color(255, 255, 255));
+        navPanel.setLayout(null);
+
+        logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cart_mart_2/images/cartLogo100.png"))); // NOI18N
+        logoLabel.setText("jLabel1");
+        logoLabel.setMaximumSize(new java.awt.Dimension(100, 100));
+        logoLabel.setMinimumSize(new java.awt.Dimension(100, 100));
+        logoLabel.setPreferredSize(new java.awt.Dimension(100, 100));
+        navPanel.add(logoLabel);
+        logoLabel.setBounds(0, 0, 100, 100);
+
+        cartCountLabel.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 36)); // NOI18N
+        cartCountLabel.setForeground(new java.awt.Color(255, 0, 0));
+        cartCountLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cartCountLabel.setText("0");
+        cartCountLabel.setMaximumSize(new java.awt.Dimension(65, 65));
+        cartCountLabel.setMinimumSize(new java.awt.Dimension(65, 65));
+        cartCountLabel.setPreferredSize(new java.awt.Dimension(65, 65));
+        navPanel.add(cartCountLabel);
+        cartCountLabel.setBounds(615, 15, 80, 70);
+
+        emptyCartLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cart_mart_2/images/emptyCart100.png"))); // NOI18N
+        emptyCartLabel.setMaximumSize(new java.awt.Dimension(100, 100));
+        emptyCartLabel.setMinimumSize(new java.awt.Dimension(100, 100));
+        emptyCartLabel.setPreferredSize(new java.awt.Dimension(100, 100));
+        navPanel.add(emptyCartLabel);
+        emptyCartLabel.setBounds(600, 0, 100, 100);
+
+        welcomLabel.setFont(new java.awt.Font("Franklin Gothic Demi", 1, 24)); // NOI18N
+        welcomLabel.setText("Welcome to Cart Mart!");
+        navPanel.add(welcomLabel);
+        welcomLabel.setBounds(110, 0, 280, 33);
+
+        sortLabel.setFont(new java.awt.Font("Franklin Gothic Demi", 1, 18)); // NOI18N
+        sortLabel.setText("Sort:");
+        navPanel.add(sortLabel);
+        sortLabel.setBounds(330, 70, 50, 21);
+
+        searchLabel.setFont(new java.awt.Font("Franklin Gothic Demi", 1, 18)); // NOI18N
+        searchLabel.setText("Search:");
+        navPanel.add(searchLabel);
+        searchLabel.setBounds(110, 70, 80, 21);
+
+        sortMenu.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
+        sortMenu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Price low to high", "Price high to low", "Name A-Z", "Name Z-A", "Department:", "     Bakery", "     Dry Grocery", "     Frozen", "     Meat", "     Produce", "     Refrigerated" }));
+        sortMenu.setLightWeightPopupEnabled(false);
+        sortMenu.setMaximumSize(new java.awt.Dimension(136, 27));
+        sortMenu.setMinimumSize(new java.awt.Dimension(136, 27));
+        sortMenu.setPreferredSize(new java.awt.Dimension(136, 27));
+        navPanel.add(sortMenu);
+        sortMenu.setBounds(380, 70, 136, 27);
+
+        searchBar.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 18)); // NOI18N
+        searchBar.setMaximumSize(new java.awt.Dimension(136, 27));
+        searchBar.setMinimumSize(new java.awt.Dimension(136, 27));
+        searchBar.setPreferredSize(new java.awt.Dimension(136, 27));
+        navPanel.add(searchBar);
+        searchBar.setBounds(180, 70, 136, 27);
+
+        goButton.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 18)); // NOI18N
+        goButton.setText("GO!");
+        navPanel.add(goButton);
+        goButton.setBounds(520, 70, 70, 29);
+
+        accountButton.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 18)); // NOI18N
+        accountButton.setLabel("Account");
+        navPanel.add(accountButton);
+        accountButton.setBounds(110, 30, 100, 29);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setFont(new java.awt.Font("Franklin Gothic Demi", 1, 48)); // NOI18N
-
-        jLabel1.setFont(new java.awt.Font("Franklin Gothic Demi", 1, 48)); // NOI18N
-        jLabel1.setText("Select Order Method");
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -89,6 +170,37 @@ public class WelcomePage extends javax.swing.JFrame {
             .addGap(0, 11, Short.MAX_VALUE)
         );
 
+        navPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        navPanel1.setLayout(null);
+
+        logoLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cart_mart_2/images/cartLogo100.png"))); // NOI18N
+        logoLabel1.setText("jLabel1");
+        logoLabel1.setMaximumSize(new java.awt.Dimension(100, 100));
+        logoLabel1.setMinimumSize(new java.awt.Dimension(100, 100));
+        logoLabel1.setPreferredSize(new java.awt.Dimension(100, 100));
+        navPanel1.add(logoLabel1);
+        logoLabel1.setBounds(0, 0, 100, 100);
+
+        welcomLabel1.setFont(new java.awt.Font("Franklin Gothic Demi", 1, 24)); // NOI18N
+        welcomLabel1.setText("Welcome to Cart Mart!");
+        navPanel1.add(welcomLabel1);
+        welcomLabel1.setBounds(110, 0, 300, 33);
+
+        accountButton1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 18)); // NOI18N
+        accountButton1.setText("Login Page");
+        accountButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accountButton1ActionPerformed(evt);
+            }
+        });
+        navPanel1.add(accountButton1);
+        accountButton1.setBounds(110, 30, 140, 29);
+
+        jLabel1.setFont(new java.awt.Font("Franklin Gothic Demi", 1, 48)); // NOI18N
+        jLabel1.setText("Select Order Method");
+        navPanel1.add(jLabel1);
+        jLabel1.setBounds(370, 40, 464, 55);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -96,31 +208,30 @@ public class WelcomePage extends javax.swing.JFrame {
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(265, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(PickUp)
-                        .addGap(166, 166, 166)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(121, 121, 121)
-                        .addComponent(Delivery1)
-                        .addGap(223, 223, 223))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(276, 276, 276))))
+                .addComponent(PickUp)
+                .addGap(166, 166, 166)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(121, 121, 121)
+                .addComponent(Delivery1)
+                .addGap(223, 223, 223))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(navPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap()
+                .addComponent(navPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 220, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(48, 209, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(Delivery1)
@@ -160,6 +271,14 @@ public class WelcomePage extends javax.swing.JFrame {
         //this.setVisible(false);
     }//GEN-LAST:event_Delivery1ActionPerformed
 
+    private void accountButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountButton1ActionPerformed
+        // TODO add your handling code here:
+        //loginView info = new loginView();
+        //info.setVisible(true);
+        //this.setVisible(false);
+        Cart_Mart_2.changeView(6,5);
+    }//GEN-LAST:event_accountButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -198,9 +317,24 @@ public class WelcomePage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Delivery1;
     private javax.swing.JButton PickUp;
+    private javax.swing.JButton accountButton;
+    private javax.swing.JButton accountButton1;
+    private javax.swing.JLabel cartCountLabel;
+    private javax.swing.JLabel emptyCartLabel;
+    private javax.swing.JButton goButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel logoLabel;
+    private javax.swing.JLabel logoLabel1;
+    private javax.swing.JPanel navPanel;
+    private javax.swing.JPanel navPanel1;
+    private javax.swing.JTextField searchBar;
+    private javax.swing.JLabel searchLabel;
+    private javax.swing.JLabel sortLabel;
+    private javax.swing.JComboBox<String> sortMenu;
+    private javax.swing.JLabel welcomLabel;
+    private javax.swing.JLabel welcomLabel1;
     // End of variables declaration//GEN-END:variables
 }
