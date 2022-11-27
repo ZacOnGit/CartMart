@@ -12,6 +12,7 @@ public class InventorySort {
     
     public ItemList list;
     public ItemList filteredList;
+    private ItemList savedList;
     /**
      * Constructor for sorting
      * InventorySort takes a given ItemList and sorts it based on a given criteria
@@ -21,6 +22,7 @@ public class InventorySort {
      */
     InventorySort(ItemList itemList, int code){
         this.list = itemList;
+        this.savedList = itemList;
         sortList(code);
     }
     /**
@@ -33,34 +35,18 @@ public class InventorySort {
      */
     InventorySort(ItemList itemList, int code, String cond){
         this.list = itemList;
+        //System.out.println(Item.inventory.getCount());
         filterList(code, cond);
     }
-    
+    /**
+     * 
+     * @param val 
+     */
     private void sortList(int val){
+        list = savedList;
         switch (val){
-            case 1:
-                for (int i = 0; i < list.getCount(); i++){
-                    for (int j = i+1; j < list.getCount(); j++){
-                        if (list.getItem(i).getItemName().compareTo(list.getItem(j).getItemName())>0){
-                            Item temp = list.getItem(i);
-                            list.setItem(list.getItem(j),i);
-                            list.setItem(temp,j);                     
-                        }   
-                    }   
-                }
-                break;
-            case 2:
-                for (int i = 0; i < list.getCount(); i++){
-                    for (int j = i+1; j < list.getCount(); j++){
-                        if (list.getItem(i).getItemCategory().compareTo(list.getItem(j).getItemCategory())>0){
-                            Item temp = list.getItem(i);
-                            list.setItem(list.getItem(j),i);
-                            list.setItem(temp,j);                     
-                        }   
-                    }   
-                }
-                break;
-            case 3:
+            //sort by price low to high
+            case 0:
                 for (int i = 0; i < list.getCount(); i++){
                     for (int j = i+1; j < list.getCount(); j++){
                         if (list.getItem(i).getItemPrice()>list.getItem(j).getItemPrice()){
@@ -71,12 +57,106 @@ public class InventorySort {
                     }   
                 }
                 break;
+            //sort by price high to low
+            case 1:
+                for (int i = 0; i < list.getCount(); i++){
+                    for (int j = i+1; j < list.getCount(); j++){
+                        if (list.getItem(i).getItemPrice()<list.getItem(j).getItemPrice()){
+                            Item temp = list.getItem(i);
+                            list.setItem(list.getItem(j),i);
+                            list.setItem(temp,j);                     
+                        }   
+                    }   
+                }
+                break;                
+            //sort by name A to Z
+            case 2:
+                for (int i = 0; i < list.getCount(); i++){
+                    for (int j = i+1; j < list.getCount(); j++){
+                        if (list.getItem(i).getItemName().compareTo(list.getItem(j).getItemName())>0){
+                            Item temp = list.getItem(i);
+                            list.setItem(list.getItem(j),i);
+                            list.setItem(temp,j);                     
+                        }   
+                    }   
+                }
+                break;
+            //sort by name Z to A
+            case 3:
+                for (int i = 0; i < list.getCount(); i++){
+                    for (int j = i+1; j < list.getCount(); j++){
+                        if (list.getItem(j).getItemName().compareTo(list.getItem(i).getItemName())>0){
+                            Item temp = list.getItem(i);
+                            list.setItem(list.getItem(j),i);
+                            list.setItem(temp,j);                     
+                        }   
+                    }   
+                }
+                break;
+            case 4:
+                break;
+            case 5:
+                ItemList tempList = new ItemList();
+                for (int i = 0; i < list.getCount(); i++){
+                    if (list.getItem(i).getItemCategory().compareTo("Bakery") == 0){
+                        tempList.addItem(list.getItem(i)); 
+                    }  
+                }
+                list = tempList;
+                break;
+            case 6:
+                tempList = new ItemList();
+                for (int i = 0; i < list.getCount(); i++){
+                    if (list.getItem(i).getItemCategory().compareTo("Dry Grocery") == 0){
+                        tempList.addItem(list.getItem(i)); 
+                    }  
+                }
+                list = tempList;
+                break;
+            case 7:
+                tempList = new ItemList();
+                for (int i = 0; i < list.getCount(); i++){
+                    if (list.getItem(i).getItemCategory().compareTo("Frozen") == 0){
+                        tempList.addItem(list.getItem(i)); 
+                    }  
+                }
+                list = tempList;
+                break;
+            case 8:
+                tempList = new ItemList();
+                for (int i = 0; i < list.getCount(); i++){
+                    if (list.getItem(i).getItemCategory().compareTo("Meat") == 0){
+                        tempList.addItem(list.getItem(i)); 
+                    }  
+                }
+                list = tempList;
+                break;
+            case 9:
+                tempList = new ItemList();
+                for (int i = 0; i < list.getCount(); i++){
+                    if (list.getItem(i).getItemCategory().compareTo("Produce") == 0){
+                        tempList.addItem(list.getItem(i)); 
+                    }  
+                }
+                list = tempList;
+                break;
+            case 10:
+                tempList = new ItemList();
+                for (int i = 0; i < list.getCount(); i++){
+                    if (list.getItem(i).getItemCategory().compareTo("Refrigerated") == 0){
+                        tempList.addItem(list.getItem(i)); 
+                    }  
+                }
+                list = tempList;
+                break;
         }
     }
     private void filterList(int code, String cond){
+        
         switch (code){
             case 1:
                 int count1 = 0;
+                
                 for (int i = 0; i < list.getCount(); i++){
                     if (list.getItem(i).getItemName().toLowerCase().contains(cond.toLowerCase()))
                         count1++;

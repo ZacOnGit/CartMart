@@ -4,6 +4,8 @@
  */
 package cart_mart_2;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Krina
@@ -14,6 +16,9 @@ public class PickUp extends javax.swing.JFrame {
      * Creates new form PickUp
      */
     public PickUp() {
+        ImageIcon logo = new ImageIcon(Cart_Mart_2.class.getResource("images/cartLogo.png"));
+        this.setIconImage(logo.getImage());
+        this.setTitle("Cart Mart");
         initComponents();
     }
 
@@ -37,7 +42,7 @@ public class PickUp extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        placeOrder = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -104,15 +109,16 @@ public class PickUp extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(81, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel4)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGap(137, 137, 137)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel2))
-                            .addGap(239, 239, 239)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(137, 137, 137)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel2))))
+                        .addGap(239, 239, 239))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(173, 173, 173))
@@ -138,11 +144,11 @@ public class PickUp extends javax.swing.JFrame {
                 .addGap(19, 19, 19))
         );
 
-        jButton1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
-        jButton1.setText("PLACE ORDER");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        placeOrder.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
+        placeOrder.setText("PLACE ORDER");
+        placeOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                placeOrderActionPerformed(evt);
             }
         });
 
@@ -166,7 +172,7 @@ public class PickUp extends javax.swing.JFrame {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(159, 159, 159)
-                        .addComponent(jButton1)
+                        .addComponent(placeOrder)
                         .addGap(138, 138, 138)
                         .addComponent(jButton2)))
                 .addContainerGap(59, Short.MAX_VALUE))
@@ -179,7 +185,7 @@ public class PickUp extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(placeOrder)
                     .addComponent(jButton2))
                 .addGap(0, 31, Short.MAX_VALUE))
         );
@@ -198,15 +204,20 @@ public class PickUp extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void placeOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placeOrderActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        Cart_Mart_2.changeView(1,7);
+        //MainGUIFrame frame = new MainGUIFrame();
+        //frame.setVisible(true);
+        //this.setVisible(false);
+    }//GEN-LAST:event_placeOrderActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Delivery_Info delivery = new Delivery_Info();
-        delivery.setVisible(true);
-        this.setVisible(false);
+        Cart_Mart_2.changeView(8,7);
+        //Delivery_Info delivery = new Delivery_Info();
+        //delivery.setVisible(true);
+        //this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -245,7 +256,6 @@ public class PickUp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -258,5 +268,6 @@ public class PickUp extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JButton placeOrder;
     // End of variables declaration//GEN-END:variables
 }

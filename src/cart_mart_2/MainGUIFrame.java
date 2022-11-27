@@ -6,8 +6,6 @@ package cart_mart_2;
 
 import java.awt.Color;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
 
 /**
  *
@@ -18,28 +16,37 @@ public class MainGUIFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form MainGUIFrame
+     * The overloaded constructor is used to create a new view without using the master inventory list
+     * @param list
      */
     public MainGUIFrame(ItemList list) {
         ImageIcon logo = new ImageIcon(Cart_Mart_2.class.getResource("images/cartLogo.png"));
         this.setIconImage(logo.getImage());
         this.setTitle("Cart Mart");
-        initComponents();
-        
         this.inventory = list;
+        initComponents();
+        ViewItems itemPanel = new ViewItems();
+        itemPanel.viewItemResults(list);
+        viewPanel.setBackground(Color.WHITE);
+        viewPanel.setViewportView(itemPanel);
+        viewPanel.setVisible(true);
+        itemPanel.setVisible(true);
     }
+    
     public MainGUIFrame(){
+        this.inventory = Item.inventory;
         ImageIcon logo = new ImageIcon(Cart_Mart_2.class.getResource("images/cartLogo.png"));
         this.setIconImage(logo.getImage());
         this.setTitle("Cart Mart");
         initComponents();
         ViewItems itemPanel = new ViewItems();
         itemPanel.viewItemResults(Item.inventory);
-        viewPanel.setBackground(Color.GREEN);
+        viewPanel.setBackground(Color.WHITE);
         viewPanel.setViewportView(itemPanel);
         viewPanel.setVisible(true);
         itemPanel.setVisible(true);
-        
     }
+    
     public void turnOn(){
         this.getContentPane().setBackground(Color.black);
         this.setVisible(true);
@@ -63,7 +70,8 @@ public class MainGUIFrame extends javax.swing.JFrame {
         sortMenu = new javax.swing.JComboBox<>();
         searchBar = new javax.swing.JTextField();
         goButton = new javax.swing.JButton();
-        accountButton = new javax.swing.JButton();
+        cartButton = new javax.swing.JButton();
+        accountButton1 = new javax.swing.JButton();
         viewPanel = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -154,10 +162,25 @@ public class MainGUIFrame extends javax.swing.JFrame {
         navPanel.add(goButton);
         goButton.setBounds(520, 70, 70, 27);
 
-        accountButton.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 18)); // NOI18N
-        accountButton.setLabel("Account");
-        navPanel.add(accountButton);
-        accountButton.setBounds(110, 30, 100, 27);
+        cartButton.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 18)); // NOI18N
+        cartButton.setText("Cart");
+        cartButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cartButtonActionPerformed(evt);
+            }
+        });
+        navPanel.add(cartButton);
+        cartButton.setBounds(490, 30, 100, 27);
+
+        accountButton1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 18)); // NOI18N
+        accountButton1.setLabel("Account");
+        accountButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accountButton1ActionPerformed(evt);
+            }
+        });
+        navPanel.add(accountButton1);
+        accountButton1.setBounds(110, 30, 100, 27);
 
         viewPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -182,31 +205,62 @@ public class MainGUIFrame extends javax.swing.JFrame {
     private void goButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goButtonMouseClicked
         // TODO add your handling code here:
         //drop down menu for sorting
-        System.out.println(Integer.valueOf(sortMenu.getSelectedIndex()));
+        //code for this event is in goButtonActionPerformed
     }//GEN-LAST:event_goButtonMouseClicked
 
+    /**
+     * For every keystroke in the search bar, the display will be updated with the value in the search bar
+     * It uses the searchBar.getText() method to capture the data and send to the InventorySort function
+     * It then populates the view with each item matching the criteria
+     * @param evt 
+     */
     private void searchBarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchBarKeyReleased
         // TODO add your handling code here:
         //search bar, updates every key release
-        System.out.println(String.valueOf(searchBar.getText()));
-        cartCountLabel.setText(String.valueOf(searchBar.getText()));
         ItemList newList = new InventorySort(inventory,1,String.valueOf(searchBar.getText())).filteredList;
-        newList.saveList();
-        /*try{
-            newList.saveList();
-        }
-        catch(Exception e){
-            
-        }*/
+        viewPanel.setVisible(false);
+        ViewItems itemPanel = new ViewItems();
+        itemPanel.viewItemResults(newList);
+        viewPanel.setViewportView(itemPanel);
+        viewPanel.setVisible(true);
+        itemPanel.setVisible(true);
     }//GEN-LAST:event_searchBarKeyReleased
 
     private void sortMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortMenuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_sortMenuActionPerformed
 
+    /**
+     * This function filters the data by a specific criteria or sorts the data to a specified value
+     * It uses the index of the selected item in the combo box to depict what occurs
+     * @param evt 
+     */
     private void goButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goButtonActionPerformed
         // TODO add your handling code here:
+        int choice = sortMenu.getSelectedIndex();
+        ItemList newList = new InventorySort(inventory, choice).list;
+        viewPanel.setVisible(false);
+        ViewItems itemPanel = new ViewItems();
+        itemPanel.viewItemResults(newList);
+        viewPanel.setViewportView(itemPanel);
+        viewPanel.setVisible(true);
+        itemPanel.setVisible(true);
     }//GEN-LAST:event_goButtonActionPerformed
+
+    /**
+     * This function causes the view to change to the cart using the static order to be displayed
+     * @param evt 
+     */
+    private void cartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cartButtonActionPerformed
+        // TODO add your handling code here:
+        Cart_Mart_2.inCart = true;
+        Cart_Mart_2.changeView(2, 1);
+    }//GEN-LAST:event_cartButtonActionPerformed
+
+    private void accountButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountButton1ActionPerformed
+        // TODO add your handling code here:
+        Cart_Mart_2.changeView(9,1);
+    }//GEN-LAST:event_accountButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,9 +296,21 @@ public class MainGUIFrame extends javax.swing.JFrame {
             }
         });
     }
+    
+    /**
+     * The following 2 functions set or return the text value of the items in cart image
+     * @param count 
+     */
+    public void setCartText(int count){
+        this.cartCountLabel.setText(String.valueOf(count));
+    }
+    public int getCartText(){
+        return Integer.valueOf(this.cartCountLabel.getText());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton accountButton;
+    private javax.swing.JButton accountButton1;
+    private javax.swing.JButton cartButton;
     private javax.swing.JLabel cartCountLabel;
     private javax.swing.JLabel emptyCartLabel;
     private javax.swing.JButton goButton;

@@ -4,19 +4,9 @@
  */
 package cart_mart_2;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.lang.*;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -25,9 +15,9 @@ import java.util.Map;
 public class ItemList {
 
     private int listCount;
-    private final ArrayList<Item> itemList;
+    protected ArrayList<Item> itemList;
 
-    ItemList(String json) {
+    public ItemList(String json) {
         itemList = new ArrayList<>();
         listCount = 0;
         createList(json);
@@ -55,10 +45,27 @@ public class ItemList {
             return this.itemList.get(value);
         }
     }
-
+    
+    public Item getItem(String name){
+        if(name == null){
+            return null;
+        }
+        for(int i = 0; i < itemList.size(); i++){
+            Item temp = itemList.get(i);
+            if(temp.getItemName().equals(name)){
+                return temp;
+            }
+        }
+        return null;
+    }
+    
     public void addItem(Item item) {
         this.itemList.add(item);
         listCount++;
+    }
+    
+    public void removeItem(int index){
+        this.itemList.remove(index);
     }
 
     private void createList(String json) {
@@ -158,28 +165,6 @@ public class ItemList {
                 inventoryString = inventoryString + "},\n";
             }
         }
-        /*
-        //https://jsonkeeper.com/b/WG83
-        URL url = new URL("https://api.jsonbin.io/v3/b/63406cdf2b3499323bd6971c");
-        HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
-        httpCon.setRequestMethod("PUT");
-        httpCon.setRequestProperty("Content-Type", "application/json");
-        httpCon.setRequestProperty("Accept","application/json");
-        httpCon.setRequestProperty("X-Master-Key", "$2b$10$znh4cRlANS3MjSaIkS5yjOER6G1SdDjc845mvuEOBj/uakWSTFBFG");
-        //httpCon.setDoInput(true);
-        httpCon.setDoOutput(true);
-        //System.out.println(inventoryString.length());
-        //httpCon.setRequestProperty("X-Bin-Versioning", "true");
-        //httpCon.setRequestProperty("X-Bin-Name", "test"); 
-        OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
-        out.write(inventoryString);
-        out.flush();
-        out.close();       
-        httpCon.connect();
-        int code = httpCon.getResponseCode();
-        String msg = httpCon.getRequestMethod();
-        System.out.println(code + " " + msg); 
-         */
         System.out.println(inventoryString);
     }
 }
