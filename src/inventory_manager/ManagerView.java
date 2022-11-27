@@ -33,7 +33,7 @@ public class ManagerView extends javax.swing.JFrame {
         var json = JsonReader.readJsonFromFile(file);
         json = json.replaceAll("\\s+", " ");
         inventory = new ItemList(json);
-        inventory.saveList();
+        //inventory.saveList();
         for(int i = 0; i < inventory.getCount(); i++) {
             this.itemComboBox.addItem(inventory.getItem(i).getItemName());
         }
