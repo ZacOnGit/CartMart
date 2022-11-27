@@ -33,7 +33,7 @@ public class CreateAccount extends javax.swing.JFrame {
     }
     
     public void data() throws IOException{ 
-        File input = new File("Customer_Data.txt");
+        File input = new File("CustomerData.txt");
         if (!input.exists()){ 
             input.createNewFile();
         }
@@ -216,6 +216,13 @@ public class CreateAccount extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNewPasswordActionPerformed
 
+    private String getUserName()
+    { 
+        String getName = txtNewUsername.getText() + ".txt";
+        return getName;
+        
+    }
+    
     private void createNewAccount_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createNewAccount_buttonActionPerformed
         // TODO add your handling code here:
         try{
@@ -233,10 +240,36 @@ public class CreateAccount extends javax.swing.JFrame {
                     data();
                 JOptionPane.showMessageDialog(this,"successful");
                 User.createUser(txtFirstName.getText(),txtLastName.getText(),txtNewUsername.getText(),txtNewPassword.getText()); 
+
                 //Cart_Mart_2.changeView(6,4);
                 //WelcomePage welcome = new WelcomePage();
                 //welcome.setVisible(true);
                 //this.setVisible(false);
+
+                WelcomePage welcome = new WelcomePage();
+                welcome.setVisible(true);
+                this.setVisible(false);
+                
+        File newInput = new File(getUserName());
+        if (!newInput.exists()){ 
+            newInput.createNewFile();
+        }
+        BufferedReader br = new BufferedReader(new FileReader(newInput));
+        Object [] Lines = br.lines().toArray();
+        int counter = 0;
+        for (int i =0; i < Lines.length; i++){ 
+            String data_line = Lines[i].toString().trim();
+            String[] row = data_line.split(",");
+            counter = Integer.parseInt(row[0]) +1;
+        }
+        FileWriter fw = new FileWriter(newInput,true);
+        BufferedWriter bw = new BufferedWriter(fw);
+        PrintWriter pw = new PrintWriter(bw);
+        pw.println(counter+"," +txtNewUsername.getText());
+        pw.flush();
+        pw.close();
+        bw.close();
+
                 }
                 
             }
@@ -260,7 +293,7 @@ public class CreateAccount extends javax.swing.JFrame {
         //String tempP = txtNewPassword.getText();
         
         try{
-            File input = new File("Customer_Data.txt");
+            File input = new File("CustomerData.txt");
             FileReader fr = new FileReader(input);
             BufferedReader br = new BufferedReader(fr);
             while((currentLine = br.readLine()) != null)

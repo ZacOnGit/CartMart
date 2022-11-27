@@ -227,11 +227,17 @@ public class Delivery_Info extends javax.swing.JFrame {
                 else{
                     data();
                 JOptionPane.showMessageDialog(this,"successful");
+
                 User.setContact(AddressName.getText(),PhoneNumber.getText());
                 Cart_Mart_2.changeView(1,8);
                 //WelcomePage welcome = new WelcomePage();
                 //welcome.setVisible(true);
                 //this.setVisible(false);
+
+                MainGUIFrame frame = new MainGUIFrame();
+                frame.setVisible(true);
+                this.setVisible(false);
+
                 }
                 
             }
@@ -248,8 +254,8 @@ public class Delivery_Info extends javax.swing.JFrame {
     private void welcomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_welcomePageActionPerformed
         // TODO add your handling code here:
         WelcomePage welcome = new WelcomePage();
-                welcome.setVisible(true);
-                this.setVisible(false);
+        welcome.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_welcomePageActionPerformed
 
      public boolean username_login() throws IOException

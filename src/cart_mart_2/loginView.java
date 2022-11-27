@@ -5,10 +5,13 @@
 package cart_mart_2;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -232,6 +235,13 @@ public class loginView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private String getUserName()
+    { 
+        String getName = txtUsername.getText() + ".txt";
+        return getName;
+        
+    }
+    
     private void login_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_buttonActionPerformed
         // TODO add your handling code here:
         try{ 
@@ -245,6 +255,31 @@ public class loginView extends javax.swing.JFrame {
                 //WelcomePage welcome = new WelcomePage();
                 //welcome.setVisible(true);
                 //this.setVisible(false);
+
+                WelcomePage welcome = new WelcomePage();
+                welcome.setVisible(true);
+                this.setVisible(false);
+                //System.out.println(getUserName());
+                
+                 File newInput = new File(getUserName());
+        if (!newInput.exists()){ 
+            newInput.createNewFile();
+        }
+        BufferedReader br = new BufferedReader(new FileReader(newInput));
+        Object [] Lines = br.lines().toArray();
+        int counter = 0;
+        for (int i =0; i < Lines.length; i++){ 
+            String data_line = Lines[i].toString().trim();
+            String[] row = data_line.split(",");
+            counter = Integer.parseInt(row[0]) +1;
+        }
+        FileWriter fw = new FileWriter(newInput,true);
+        BufferedWriter bw = new BufferedWriter(fw);
+        PrintWriter pw = new PrintWriter(bw);
+        pw.println(counter+"," +txtUsername.getText());
+        pw.flush();
+        pw.close();
+        bw.close();
                 
             }
             else
@@ -270,7 +305,7 @@ public class loginView extends javax.swing.JFrame {
                 }
         
         try{
-            File input = new File("Customer_Data.txt");
+            File input = new File("CustomerData.txt");
             FileReader fr = new FileReader(input);
             BufferedReader br = new BufferedReader(fr);
             while((currentLine = br.readLine()) != null)
