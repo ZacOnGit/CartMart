@@ -232,7 +232,7 @@ public class CreateAccount extends javax.swing.JFrame {
                 else{
                     data();
                 JOptionPane.showMessageDialog(this,"successful");
-                User.createUser(txtFirstName.getText(),txtLastName.getText(),txtNewUsername.getText(),txtNewUsername.getText()); 
+                User.createUser(txtFirstName.getText(),txtLastName.getText(),txtNewUsername.getText(),txtNewPassword.getText()); 
                 //Cart_Mart_2.changeView(6,4);
                 //WelcomePage welcome = new WelcomePage();
                 //welcome.setVisible(true);

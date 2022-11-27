@@ -4,6 +4,7 @@
  */
 package cart_mart_2;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -16,7 +17,7 @@ public class User {
     private static String firstName = "David";
     private static String lastName = "David";
     public static Boolean guest = true;
-    private static String userName;
+    public static String userName;
     private static String passWord;
     private static String address = "no address";
     private static String phone = "no phone";
@@ -32,6 +33,15 @@ public class User {
         passWord = pw;
         if (!guest) 
             receiptName = firstName;
+        try{
+            
+            File history = new File("src/cart_mart_2/resources/"+un+".txt");
+            if (!history.exists())
+                history.createNewFile();
+        }
+        catch(Exception e){
+            
+        }
     }
 
     public void saveToHistory() {

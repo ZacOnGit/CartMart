@@ -4,6 +4,9 @@
  */
 package cart_mart_2;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -13,6 +16,8 @@ import java.util.ArrayList;
 public class Order extends ItemList{
     public static ArrayList<Integer> qtyList;
     public static ArrayList<Integer> itemIdList;
+    public static String historyToSave;
+    public static int orderNumber;
     
     public Order(){
         qtyList = new ArrayList<>();
@@ -33,7 +38,17 @@ public class Order extends ItemList{
     }
     
     public static void saveOrder(){
-        ReceiptPanel.orderForHistory = ReceiptPanel.orderForHistory.substring(0, ReceiptPanel.orderForHistory.length() - 1);
-        System.out.println(ReceiptPanel.orderForHistory);
+        historyToSave = ReceiptPanel.orderForHistory.substring(0, ReceiptPanel.orderForHistory.length() - 1);
+        
+        
+        try(FileWriter fw = new FileWriter("src/cart_mart_2/resources/"+User.userName+".txt", true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter out = new PrintWriter(bw))
+        {
+            out.println(orderNumber + ":" + historyToSave);
+        } catch (Exception e) {
+            System.out.println("An unexpected error occured.");
+        }
+        //System.out.println(ReceiptPanel.orderForHistory);
     }
 }

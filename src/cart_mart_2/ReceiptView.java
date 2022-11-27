@@ -28,6 +28,7 @@ public class ReceiptView extends javax.swing.JFrame {
         DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("MMddyyHHmm");
         String formattedDate = time.format(formatTime);
         orderNumber = Integer.valueOf(formattedDate);
+        Order.orderNumber = orderNumber;
         ImageIcon logo = new ImageIcon(Cart_Mart_2.class.getResource("images/cartLogo.png"));
         this.setIconImage(logo.getImage());
         this.setTitle("Cart Mart");

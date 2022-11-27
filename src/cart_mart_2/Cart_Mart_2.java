@@ -4,6 +4,10 @@
  */
 package cart_mart_2;
 
+import inventory_manager.ManagerView;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Cart Mart main
  *
@@ -18,6 +22,7 @@ public class Cart_Mart_2 {
     static Delivery_Info delivery;
     static PickUp pickUp;
     static CreateAccount create;
+    static ManagerView manager;
     //static AccountView account;
     static Boolean inCart = false;
     static Boolean inReceipt = false;
@@ -63,6 +68,7 @@ public class Cart_Mart_2 {
      *        7: PickUp
      *        8: Delivery_Info
      *        9: AccountView
+     *        10:Mgr application
      * @param current
      * @param next 
      */
@@ -125,6 +131,14 @@ public class Cart_Mart_2 {
                         break;
                 }
                 break;
+            case 5:
+                switch(current){
+                    case 6:
+                        login.setVisible(false);
+                        welcome.setVisible(true);
+                        break;
+                }
+                break;
             case 6:
                 switch(current){
                     case 4:
@@ -169,6 +183,21 @@ public class Cart_Mart_2 {
                         //account.setVisible(true);
                         System.out.println("you're in the account now");
                         break;
+                }
+                break;
+            case 10:
+                switch(current){
+                    case 5:
+            {
+                try {
+                    manager = new ManagerView();
+                } catch (Exception ex) {
+                    Logger.getLogger(Cart_Mart_2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+                    login.setVisible(false);
+                    manager.setVisible(true);
+
                 }
                 break;
         }  

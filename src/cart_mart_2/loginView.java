@@ -237,7 +237,10 @@ public class loginView extends javax.swing.JFrame {
         try{ 
             if (user_info() == true)
             { 
+                
                 JOptionPane.showMessageDialog(this,"successful");
+                // create user info
+                
                 Cart_Mart_2.changeView(6,5);
                 //WelcomePage welcome = new WelcomePage();
                 //welcome.setVisible(true);
@@ -261,6 +264,10 @@ public class loginView extends javax.swing.JFrame {
         
         String tempU = txtUsername.getText();
         String tempP = txtPassword.getText();
+        if (tempU.equals("admin") && tempP.equals("admin")){
+                    System.out.println("manager");
+                    Cart_Mart_2.changeView(10, 5);
+                }
         
         try{
             File input = new File("Customer_Data.txt");
@@ -269,8 +276,10 @@ public class loginView extends javax.swing.JFrame {
             while((currentLine = br.readLine()) != null)
             { 
                 data = currentLine.split(delimiter);
+                
                 if (data[3].equals(tempU) && data[4].equals(tempP))
                         {
+                            User.createUser(data[1],data[2],data[3],data[4]);
                             return true;
                         }
             }

@@ -27,29 +27,18 @@ public class TestFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         itemPanel = new javax.swing.JPanel();
-        nameLabel = new javax.swing.JLabel();
-        priceLabel = new javax.swing.JLabel();
-        totalLabel = new javax.swing.JLabel();
-        qtyLabel = new javax.swing.JLabel();
+        orderLabel = new javax.swing.JLabel();
+        viewOrder = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         itemPanel.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 18)); // NOI18N
 
-        nameLabel.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 18)); // NOI18N
-        nameLabel.setText("Name");
+        orderLabel.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 18)); // NOI18N
+        orderLabel.setText("Order Number");
 
-        priceLabel.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 18)); // NOI18N
-        priceLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        priceLabel.setText("Price");
-
-        totalLabel.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 18)); // NOI18N
-        totalLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        totalLabel.setText("total");
-
-        qtyLabel.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 18)); // NOI18N
-        qtyLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        qtyLabel.setText("qty");
+        viewOrder.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
+        viewOrder.setText("View Order");
 
         javax.swing.GroupLayout itemPanelLayout = new javax.swing.GroupLayout(itemPanel);
         itemPanel.setLayout(itemPanelLayout);
@@ -57,24 +46,18 @@ public class TestFrame extends javax.swing.JFrame {
             itemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(itemPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(priceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(qtyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(totalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(224, Short.MAX_VALUE))
+                .addComponent(orderLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(viewOrder)
+                .addContainerGap(282, Short.MAX_VALUE))
         );
         itemPanelLayout.setVerticalGroup(
             itemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(itemPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(itemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(priceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(qtyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(totalLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(itemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(orderLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(viewOrder))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -132,9 +115,7 @@ public class TestFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel itemPanel;
-    private javax.swing.JLabel nameLabel;
-    private javax.swing.JLabel priceLabel;
-    private javax.swing.JLabel qtyLabel;
-    private javax.swing.JLabel totalLabel;
+    private javax.swing.JLabel orderLabel;
+    private javax.swing.JButton viewOrder;
     // End of variables declaration//GEN-END:variables
 }
