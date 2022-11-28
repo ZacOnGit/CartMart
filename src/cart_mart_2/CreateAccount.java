@@ -31,24 +31,30 @@ public class CreateAccount extends javax.swing.JFrame {
         this.setTitle("Cart Mart");
         initComponents();
     }
-    
-    public void data() throws IOException{ 
+
+    /**
+     * the function data() will add in the information about the new account in
+     * the text file CustomerData.txt
+     *
+     * @throws IOException
+     */
+    public void data() throws IOException {
         File input = new File("CustomerData.txt");
-        if (!input.exists()){ 
+        if (!input.exists()) {
             input.createNewFile();
         }
         BufferedReader br = new BufferedReader(new FileReader(input));
-        Object [] Lines = br.lines().toArray();
+        Object[] Lines = br.lines().toArray();
         int counter = 0;
-        for (int i =0; i < Lines.length; i++){ 
+        for (int i = 0; i < Lines.length; i++) {
             String data_line = Lines[i].toString().trim();
             String[] row = data_line.split(",");
-            counter = Integer.parseInt(row[0]) +1;
+            counter = Integer.parseInt(row[0]) + 1;
         }
-        FileWriter fw = new FileWriter(input,true);
+        FileWriter fw = new FileWriter(input, true);
         BufferedWriter bw = new BufferedWriter(fw);
         PrintWriter pw = new PrintWriter(bw);
-        pw.println(counter+"," +txtFirstName.getText() + ","+txtLastName.getText() + "," +txtNewUsername.getText() +","+txtNewPassword.getText());
+        pw.println(counter + "," + txtFirstName.getText() + "," + txtLastName.getText() + "," + txtNewUsername.getText() + "," + txtNewPassword.getText());
         pw.flush();
         pw.close();
         bw.close();
@@ -206,118 +212,103 @@ public class CreateAccount extends javax.swing.JFrame {
 
     private void getLoginPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getLoginPageActionPerformed
         // TODO add your handling code here:
-        Cart_Mart_2.changeView(5,4);
-        //loginView homepage = new loginView();
-        //homepage.setVisible(true);
-        //this.setVisible(false);
+        Cart_Mart_2.changeView(5, 4);
     }//GEN-LAST:event_getLoginPageActionPerformed
 
-   
+
     private void txtNewPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewPasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNewPasswordActionPerformed
+    /**
+     * the function getUserName() will get the username from the text file and
+     * add .txt to the end of it to make a user text file with their information
+     *
+     * @return
+     */
 
-    private String getUserName()
-    { 
+    private String getUserName() {
         String getName = txtNewUsername.getText() + ".txt";
         return getName;
-        
+
     }
-    
+
     private void createNewAccount_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createNewAccount_buttonActionPerformed
         // TODO add your handling code here:
-        try{
-            if(!"".equals(txtFirstName.getText())&& !"".equals(txtLastName.getText()) && !"".equals(txtNewUsername.getText()) &&!"".equals(txtNewPassword.getText()))
-            { 
-                //data();
-                //JOptionPane.showMessageDialog(this,"successful");
-                 
-                if(username_login() == true)
-                { 
-                    JOptionPane.showMessageDialog(this,"choose a different username");
-                }
-                
-                else{
+        try {
+            if (!"".equals(txtFirstName.getText()) && !"".equals(txtLastName.getText()) && !"".equals(txtNewUsername.getText()) && !"".equals(txtNewPassword.getText())) {
+
+                if (username_login() == true) {
+                    JOptionPane.showMessageDialog(this, "choose a different username");
+                } else {
                     data();
-                JOptionPane.showMessageDialog(this,"successful");
-                User.createUser(txtFirstName.getText(),txtLastName.getText(),txtNewUsername.getText(),txtNewPassword.getText()); 
+                    JOptionPane.showMessageDialog(this, "successful");
+                    User.createUser(txtFirstName.getText(), txtLastName.getText(), txtNewUsername.getText(), txtNewPassword.getText());
 
-                Cart_Mart_2.changeView(6,4);
-                //WelcomePage welcome = new WelcomePage();
-                //welcome.setVisible(true);
-                //this.setVisible(false);
-
-                //WelcomePage welcome = new WelcomePage();
-                //welcome.setVisible(true);
-                //this.setVisible(false);
-                
-        File newInput = new File(getUserName());
-        if (!newInput.exists()){ 
-            newInput.createNewFile();
-        }
-        BufferedReader br = new BufferedReader(new FileReader(newInput));
-        Object [] Lines = br.lines().toArray();
-        int counter = 0;
-        for (int i =0; i < Lines.length; i++){ 
-            String data_line = Lines[i].toString().trim();
-            String[] row = data_line.split(",");
-            counter = Integer.parseInt(row[0]) +1;
-        }
-        FileWriter fw = new FileWriter(newInput,true);
-        BufferedWriter bw = new BufferedWriter(fw);
-        PrintWriter pw = new PrintWriter(bw);
-        pw.println(counter+"," +txtNewUsername.getText());
-        pw.flush();
-        pw.close();
-        bw.close();
+                    Cart_Mart_2.changeView(6, 4);
+                    File newInput = new File(getUserName());
+                    if (!newInput.exists()) {
+                        newInput.createNewFile();
+                    }
+                    BufferedReader br = new BufferedReader(new FileReader(newInput));
+                    Object[] Lines = br.lines().toArray();
+                    int counter = 0;
+                    for (int i = 0; i < Lines.length; i++) {
+                        String data_line = Lines[i].toString().trim();
+                        String[] row = data_line.split(",");
+                        counter = Integer.parseInt(row[0]) + 1;
+                    }
+                    FileWriter fw = new FileWriter(newInput, true);
+                    BufferedWriter bw = new BufferedWriter(fw);
+                    PrintWriter pw = new PrintWriter(bw);
+                    pw.println(counter + "," + txtNewUsername.getText());
+                    pw.flush();
+                    pw.close();
+                    bw.close();
 
                 }
-                
+
+            } else {
+                JOptionPane.showMessageDialog(this, "fill in all the fields");
             }
-            else
-            { 
-                JOptionPane.showMessageDialog(this,"fill in all the fields");
-            }
-        }catch(IOException ex)
-        { 
-            Logger.getLogger(CreateAccount.class.getName()).log(Level.SEVERE,null,ex);
+        } catch (IOException ex) {
+            Logger.getLogger(CreateAccount.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_createNewAccount_buttonActionPerformed
+    /**
+     * the function username_login() will make sure to not to repeat usernames
+     * and will show a pop up about choosing another username
+     *
+     * @return
+     * @throws IOException
+     */
 
-    public boolean username_login() throws IOException
-    { 
+    public boolean username_login() throws IOException {
         String currentLine;
         String data[];
         String delimiter = ",";
-        
+
         String tempU = txtNewUsername.getText();
         //String tempP = txtNewPassword.getText();
-        
-        try{
+
+        try {
             File input = new File("CustomerData.txt");
             FileReader fr = new FileReader(input);
             BufferedReader br = new BufferedReader(fr);
-            while((currentLine = br.readLine()) != null)
-            { 
+            while ((currentLine = br.readLine()) != null) {
                 data = currentLine.split(delimiter);
-                if (data[3].equals(tempU))
-                        {
-                            return true;
-                        }
-            }
-                }catch(Exception e)
-                { 
-                    
+                if (data[3].equals(tempU)) {
+                    return true;
                 }
+            }
+        } catch (Exception e) {
+
+        }
         return false;
     }
-    
+
     /**
      * @param args the command line arguments
      */
-    
-    
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

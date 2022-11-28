@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author harks
+ * @author drew
  */
 public class AccountView extends javax.swing.JFrame {
 
@@ -24,6 +24,12 @@ public class AccountView extends javax.swing.JFrame {
      */
     public static String orderNumber;
     public static String orderDetails;
+
+    /**
+     * the function AccountView() will show the account view, in which it will
+     * show all the past order histories, a way to start a new order, and
+     * username and name of customer
+     */
     public AccountView() {
         ImageIcon logo = new ImageIcon(Cart_Mart_2.class.getResource("images/cartLogo.png"));
         this.setIconImage(logo.getImage());
@@ -34,11 +40,10 @@ public class AccountView extends javax.swing.JFrame {
         Cart_Mart_2.inCart = false;
         String delimiter = ":";
         String currentLine;
-        String data[];  
+        String data[];
         ViewItems itemPanel = new ViewItems();
-        //System.out.println(User.userName);
-        try{
-            File input = new File("src/cart_mart_2/resources/"+User.userName+".txt");
+        try {
+            File input = new File("src/cart_mart_2/resources/" + User.userName + ".txt");
             FileReader fr = new FileReader(input);
             BufferedReader br = new BufferedReader(fr);
             while ((currentLine = br.readLine()) != null) {
@@ -46,10 +51,8 @@ public class AccountView extends javax.swing.JFrame {
                 orderNumber = data[0];
                 orderDetails = data[1];
                 itemPanel.viewItemResults(Item.inventory);
-                //System.out.println(orderNumber);
-            }   
-        }
-        catch(Exception e){
+            }
+        } catch (Exception e) {
             System.out.println(e);
         }
         viewPanel.setBackground(Color.GREEN);
@@ -218,17 +221,11 @@ public class AccountView extends javax.swing.JFrame {
     private void createAccount_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccount_buttonActionPerformed
         // TODO add your handling code here:
         Cart_Mart_2.changeView(4, 9);
-        //CreateAccount new_account = new CreateAccount();
-        //new_account.setVisible(true);
-        //this.setVisible(false);
     }//GEN-LAST:event_createAccount_buttonActionPerformed
 
     private void not_logged_in_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_not_logged_in_buttonActionPerformed
         // TODO add your handling code here:
         Cart_Mart_2.changeView(5, 9);
-        //loginView new_account = new loginView();
-        //new_account.setVisible(true);
-        //this.setVisible(false);
     }//GEN-LAST:event_not_logged_in_buttonActionPerformed
 
     private void username_displayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_username_displayPropertyChange
@@ -238,11 +235,7 @@ public class AccountView extends javax.swing.JFrame {
     private void Welcome_PageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Welcome_PageActionPerformed
         // TODO add your handling code here:
         Cart_Mart_2.changeView(6, 9);
-        //WelcomePage new_account = new WelcomePage();
-        //new_account.setVisible(true);
-        //this.setVisible(false);
     }//GEN-LAST:event_Welcome_PageActionPerformed
-
 
     /**
      * @param args the command line arguments

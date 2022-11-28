@@ -31,24 +31,30 @@ public class Delivery_Info extends javax.swing.JFrame {
         this.setTitle("Cart Mart");
         initComponents();
     }
-    
-      public void data() throws IOException{ 
+
+    /**
+     * the function data() will save the delivery information in a text file
+     * named DeliveryInfo. It will include their address and phone number
+     *
+     * @throws IOException
+     */
+    public void data() throws IOException {
         File input = new File("DeliveryInfo.txt");
-        if (!input.exists()){ 
+        if (!input.exists()) {
             input.createNewFile();
         }
         BufferedReader br = new BufferedReader(new FileReader(input));
-        Object [] Lines = br.lines().toArray();
+        Object[] Lines = br.lines().toArray();
         int counter = 0;
-        for (int i =0; i < Lines.length; i++){ 
+        for (int i = 0; i < Lines.length; i++) {
             String data_line = Lines[i].toString().trim();
             String[] row = data_line.split(",");
-            counter = Integer.parseInt(row[0]) +1;
+            counter = Integer.parseInt(row[0]) + 1;
         }
-        FileWriter fw = new FileWriter(input,true);
+        FileWriter fw = new FileWriter(input, true);
         BufferedWriter bw = new BufferedWriter(fw);
         PrintWriter pw = new PrintWriter(bw);
-        pw.println(counter+"," +AddressName.getText() + ","+PhoneNumber.getText());
+        pw.println(counter + "," + AddressName.getText() + "," + PhoneNumber.getText());
         pw.flush();
         pw.close();
         bw.close();
@@ -213,79 +219,61 @@ public class Delivery_Info extends javax.swing.JFrame {
 
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         // TODO add your handling code here:
-        try{
-            if(!"".equals(AddressName.getText())&& !"".equals(PhoneNumber.getText()))
-            { 
-                //data();
-                //JOptionPane.showMessageDialog(this,"successful");
-                 
-                if(username_login() == true)
-                { 
-                    JOptionPane.showMessageDialog(this,"choose a different username");
-                }
-                
-                else{
+        try {
+            if (!"".equals(AddressName.getText()) && !"".equals(PhoneNumber.getText())) {
+
+                if (username_login() == true) {
+                    JOptionPane.showMessageDialog(this, "choose a different username");
+                } else {
                     data();
-                JOptionPane.showMessageDialog(this,"successful");
+                    JOptionPane.showMessageDialog(this, "successful");
 
-                User.setContact(AddressName.getText(),PhoneNumber.getText());
-                Cart_Mart_2.changeView(1,8);
-                //WelcomePage welcome = new WelcomePage();
-                //welcome.setVisible(true);
-                //this.setVisible(false);
-
-                //MainGUIFrame frame = new MainGUIFrame();
-                //frame.setVisible(true);
-                //this.setVisible(false);
-
+                    User.setContact(AddressName.getText(), PhoneNumber.getText());
+                    Cart_Mart_2.changeView(1, 8);
                 }
-                
+
+            } else {
+                JOptionPane.showMessageDialog(this, "fill in all the fields");
             }
-            else
-            { 
-                JOptionPane.showMessageDialog(this,"fill in all the fields");
-            }
-        }catch(IOException ex)
-        { 
-            Logger.getLogger(CreateAccount.class.getName()).log(Level.SEVERE,null,ex);
+        } catch (IOException ex) {
+            Logger.getLogger(CreateAccount.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_submitActionPerformed
 
     private void welcomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_welcomePageActionPerformed
         // TODO add your handling code here:
         Cart_Mart_2.changeView(6, 8);
-        //WelcomePage welcome = new WelcomePage();
-        //welcome.setVisible(true);
-        //this.setVisible(false);
     }//GEN-LAST:event_welcomePageActionPerformed
+    /**
+     * the function username_login() will make sure to not repeat addresses
+     *
+     * @return
+     * @throws IOException
+     */
 
-     public boolean username_login() throws IOException
-    { 
+    public boolean username_login() throws IOException {
         String currentLine;
         String data[];
         String delimiter = ",";
-        
+
         String tempU = AddressName.getText();
-        //String tempP = txtNewPassword.getText();
-        
-        try{
+
+        try {
             File input = new File("DeliveryInfo.txt");
             FileReader fr = new FileReader(input);
             BufferedReader br = new BufferedReader(fr);
-            while((currentLine = br.readLine()) != null)
-            { 
+            while ((currentLine = br.readLine()) != null) {
                 data = currentLine.split(delimiter);
-                if (data[3].equals(tempU))
-                        {
-                            return true;
-                        }
-            }
-                }catch(Exception e)
-                { 
-                    
+                if (data[3].equals(tempU)) {
+                    return true;
                 }
+            }
+        } catch (Exception e) {
+
+        }
         return false;
     }
+
     /**
      * @param args the command line arguments
      */
