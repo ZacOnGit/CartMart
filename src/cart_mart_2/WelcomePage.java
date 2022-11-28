@@ -276,7 +276,7 @@ public class WelcomePage extends javax.swing.JFrame {
         //loginView info = new loginView();
         //info.setVisible(true);
         //this.setVisible(false);
-        Cart_Mart_2.changeView(6,5);
+        Cart_Mart_2.changeView(5, 6);
     }//GEN-LAST:event_accountButton1ActionPerformed
 
     /**

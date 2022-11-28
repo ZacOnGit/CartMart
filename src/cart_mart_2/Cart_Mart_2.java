@@ -14,6 +14,7 @@ import java.util.logging.Logger;
  * @author david
  */
 public class Cart_Mart_2 {
+
     static MainGUIFrame frame;
     static CartView cart;
     static loginView login;
@@ -23,16 +24,19 @@ public class Cart_Mart_2 {
     static PickUp pickUp;
     static CreateAccount create;
     static ManagerView manager;
-    //static AccountView account;
+    static AccountView account;
     static Boolean inCart = false;
     static Boolean inReceipt = false;
+    static Boolean inAccount = false;
+    static Boolean oldOrder = false;
+
     /**
      * @param args the command line arguments
      * @throws java.lang.Exception
      */
     public static void main(String[] args) throws Exception {
 
-        final String file = "src/cart_mart_2/resources/inventoryList.json";      
+        final String file = "src/cart_mart_2/resources/inventoryList.json";
         var json = JsonReader.readJsonFromFile(file);
         //the replaceAll function call is needed to remove whitespaces from the string
         json = json.replaceAll("\\s+", " ");
@@ -47,35 +51,38 @@ public class Cart_Mart_2 {
         //the rest of the program is bouncing around the various views 
         //utilizing the background logic
     }
-    
-    public static void refresh(int count){
+
+    public static void refresh(int count) {
         //need to update the cart counter
         frame.setCartText(count);
     }
-    public static void printOrder(){
+
+    public static void printOrder() {
         //saves the order in a file for later viewing
         Order.saveOrder();
     }
+
     /**
-     * got in too deep before realizing that we really needed an observer
-     * so went this route
-     * views: 1: MainGUIFrame: ViewItems: ItemPanel
-     *        2: CartView
-     *        3: ReceiptView
-     *        4: CreateAccount
-     *        5: LoginView
-     *        6: WelcomePage
-     *        7: PickUp
-     *        8: Delivery_Info
-     *        9: AccountView
-     *        10:Mgr application
+     * got in too deep before realizing that we really needed an observer so
+     * went this route views: 
+     *  1: MainGUIFrame: ViewItems: ItemPanel 
+     *  2: CartView
+     *  3: ReceiptView 
+     *  4: CreateAccount 
+     *  5: LoginView 
+     *  6: WelcomePage 
+     *  7: PickUp 
+     *  8: Delivery_Info 
+     *  9: AccountView 
+     *  10:Mgr application
+     *
      * @param current
-     * @param next 
+     * @param next
      */
-    public static void changeView(int next, int current){
+    public static void changeView(int next, int current) {
         switch (next) {
             case 1:
-                switch (current){
+                switch (current) {
                     case 2:
                         cart.setVisible(false);
                         frame.setVisible(true);
@@ -88,32 +95,52 @@ public class Cart_Mart_2 {
                         delivery.setVisible(false);
                         frame.setVisible(true);
                         break;
-                } break;
+                }
+                break;
             case 2:
-                switch (current){
-                    case 1: 
+                switch (current) {
+                    case 1:
                         cart = new CartView();
                         frame.setVisible(false);
                         cart.setVisible(true);
                         break;
                     case 2:
-                        
+
                         break;
-                        
-                } break;
+
+                }
+                break;
             case 3:
-                switch (current){
-                    case 2:                        
-                        frame.setVisible(false);
+                switch (current) {
+                    case 2:
+                        cart.setVisible(false);
+                        inCart = false;
                         inReceipt = true;
                         //create itemlist from order
                         ItemList orderList = new ItemList();
-                        for (int item: Order.itemIdList){
-                            for (int i = 0; i < Item.inventory.getCount(); i++){
-                                if (item == Item.inventory.getItem(i).getItemId()){
+                        for (int item : Order.itemIdList) {
+                            for (int i = 0; i < Item.inventory.getCount(); i++) {
+                                if (item == Item.inventory.getItem(i).getItemId()) {
                                     orderList.addItem(Item.inventory.getItem(i));
                                     break;
-                                }                                    
+                                }
+                            }
+                        }
+                        receipt = new ReceiptView(orderList);
+                        receipt.setVisible(true);
+                        break;
+                    case 9:
+                        account.setVisible(false);
+                        inReceipt = true;
+                        inAccount = false;
+                        oldOrder = true;
+                        orderList = new ItemList();
+                        for (int item : Order.itemIdList) {
+                            for (int i = 0; i < Item.inventory.getCount(); i++) {
+                                if (item == Item.inventory.getItem(i).getItemId()) {
+                                    orderList.addItem(Item.inventory.getItem(i));
+                                    break;
+                                }
                             }
                         }
                         receipt = new ReceiptView(orderList);
@@ -122,25 +149,38 @@ public class Cart_Mart_2 {
                 }
                 break;
             case 4:
-                switch(current){
-                    
+                switch (current) {
                     case 5:
                         create = new CreateAccount();
                         login.setVisible(false);
                         create.setVisible(true);
                         break;
+                    case 9:
+                        create = new CreateAccount();
+                        account.setVisible(false);
+                        create.setVisible(true);
+                        break;
                 }
                 break;
             case 5:
-                switch(current){
+                switch (current) {
+                    case 4:
+                        create.setVisible(false);
+                        login.setVisible(true);
+                        break;
                     case 6:
-                        login.setVisible(false);
-                        welcome.setVisible(true);
+                        welcome.setVisible(false);
+                        login.setVisible(true);
+                        break;
+                    case 9:
+                        login = new loginView();
+                        account.setVisible(false);
+                        login.setVisible(true);
                         break;
                 }
                 break;
             case 6:
-                switch(current){
+                switch (current) {
                     case 4:
                         welcome = new WelcomePage();
                         create.setVisible(false);
@@ -151,10 +191,19 @@ public class Cart_Mart_2 {
                         login.setVisible(false);
                         welcome.setVisible(true);
                         break;
+                    case 8:
+                        delivery.setVisible(false);
+                        welcome.setVisible(true);
+                        break;
+                    case 9:
+                        account.setVisible(false);
+                        welcome = new WelcomePage();
+                        welcome.setVisible(true);
+                        break;
                 }
                 break;
             case 7:
-                switch(current){
+                switch (current) {
                     case 6:
                         pickUp = new PickUp();
                         welcome.setVisible(false);
@@ -164,42 +213,51 @@ public class Cart_Mart_2 {
                         delivery = new Delivery_Info();
                         pickUp.setVisible(false);
                         delivery.setVisible(true);
+                        break;
                 }
                 break;
             case 8:
-                switch(current){
+                switch (current) {
                     case 6:
                         delivery = new Delivery_Info();
                         welcome.setVisible(false);
                         delivery.setVisible(true);
                         break;
+                    case 7:
+                        delivery = new Delivery_Info();
+                        pickUp.setVisible(false);
+                        delivery.setVisible(true);
+                        break;
                 }
                 break;
             case 9:
-                switch(current){
+                switch (current) {
                     case 1:
-                        //account = new AccountView();
-                        //frame.setVisible(false);
-                        //account.setVisible(true);
-                        System.out.println("you're in the account now");
+                        account = new AccountView();
+                        frame.setVisible(false);
+                        account.setVisible(true);
+                        break;
+                    case 3: 
+                        account = new AccountView();
+                        receipt.setVisible(false);
+                        account.setVisible(true);
                         break;
                 }
                 break;
             case 10:
-                switch(current){
-                    case 5:
-            {
-                try {
-                    manager = new ManagerView();
-                } catch (Exception ex) {
-                    Logger.getLogger(Cart_Mart_2.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+                switch (current) {
+                    case 5: {
+                        try {
+                            manager = new ManagerView();
+                        } catch (Exception ex) {
+                            Logger.getLogger(Cart_Mart_2.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                     login.setVisible(false);
                     manager.setVisible(true);
 
                 }
                 break;
-        }  
+        }
     }
 }

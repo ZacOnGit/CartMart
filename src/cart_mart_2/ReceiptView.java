@@ -118,6 +118,11 @@ public class ReceiptView extends javax.swing.JFrame {
 
         accountButton1.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 18)); // NOI18N
         accountButton1.setLabel("Account");
+        accountButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accountButton1ActionPerformed(evt);
+            }
+        });
         navPanel.add(accountButton1);
         accountButton1.setBounds(110, 30, 100, 27);
 
@@ -150,6 +155,11 @@ public class ReceiptView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void accountButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountButton1ActionPerformed
+        // TODO add your handling code here:
+        Cart_Mart_2.changeView(9,3);
+    }//GEN-LAST:event_accountButton1ActionPerformed
 
     /**
      * @param args the command line arguments

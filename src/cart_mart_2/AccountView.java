@@ -7,12 +7,10 @@ package cart_mart_2;
 // JSONReader read from file function
 // cartmart2 read from file
 
+import java.awt.Color;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 /**
@@ -24,11 +22,39 @@ public class AccountView extends javax.swing.JFrame {
     /**
      * Creates new form AccountView
      */
+    public static String orderNumber;
+    public static String orderDetails;
     public AccountView() {
         ImageIcon logo = new ImageIcon(Cart_Mart_2.class.getResource("images/cartLogo.png"));
         this.setIconImage(logo.getImage());
         this.setTitle("Cart Mart");
         initComponents();
+        Cart_Mart_2.inAccount = true;
+        Cart_Mart_2.inReceipt = false;
+        Cart_Mart_2.inCart = false;
+        String delimiter = ":";
+        String currentLine;
+        String data[];  
+        ViewItems itemPanel = new ViewItems();
+        //System.out.println(User.userName);
+        try{
+            File input = new File("src/cart_mart_2/resources/"+User.userName+".txt");
+            FileReader fr = new FileReader(input);
+            BufferedReader br = new BufferedReader(fr);
+            while ((currentLine = br.readLine()) != null) {
+                data = currentLine.split(delimiter);
+                orderNumber = data[0];
+                orderDetails = data[1];
+                itemPanel.viewItemResults(Item.inventory);
+                //System.out.println(orderNumber);
+            }   
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        viewPanel.setBackground(Color.GREEN);
+        viewPanel.setViewportView(itemPanel);
+        viewPanel.setVisible(true);
     }
 
     /**
@@ -44,7 +70,6 @@ public class AccountView extends javax.swing.JFrame {
         navPanel = new javax.swing.JPanel();
         logoLabel2 = new javax.swing.JLabel();
         page_title = new javax.swing.JLabel();
-        Shop = new javax.swing.JButton();
         Welcome_Page = new javax.swing.JButton();
         name_label = new javax.swing.JLabel();
         username_label = new javax.swing.JLabel();
@@ -55,6 +80,7 @@ public class AccountView extends javax.swing.JFrame {
         noAccount_label = new javax.swing.JLabel();
         createAccount_button = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
+        viewPanel = new javax.swing.JScrollPane();
 
         logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cart_mart_2/images/cartLogo100.png"))); // NOI18N
         logoLabel.setText("jLabel1");
@@ -81,22 +107,8 @@ public class AccountView extends javax.swing.JFrame {
         navPanel.add(page_title);
         page_title.setBounds(110, 10, 270, 30);
 
-        Shop.setFont(new java.awt.Font("Franklin Gothic Demi", 1, 14)); // NOI18N
-        Shop.setText("Shop");
-        Shop.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        Shop.setMaximumSize(new java.awt.Dimension(130, 30));
-        Shop.setMinimumSize(new java.awt.Dimension(130, 30));
-        Shop.setPreferredSize(new java.awt.Dimension(130, 30));
-        Shop.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ShopActionPerformed(evt);
-            }
-        });
-        navPanel.add(Shop);
-        Shop.setBounds(500, 70, 130, 30);
-
         Welcome_Page.setFont(new java.awt.Font("Franklin Gothic Demi", 1, 14)); // NOI18N
-        Welcome_Page.setText("Welcome Page");
+        Welcome_Page.setText("Start New Order");
         Welcome_Page.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Welcome_Page.setMaximumSize(new java.awt.Dimension(130, 30));
         Welcome_Page.setMinimumSize(new java.awt.Dimension(130, 30));
@@ -107,7 +119,7 @@ public class AccountView extends javax.swing.JFrame {
             }
         });
         navPanel.add(Welcome_Page);
-        Welcome_Page.setBounds(500, 30, 130, 30);
+        Welcome_Page.setBounds(470, 30, 160, 30);
 
         name_label.setFont(new java.awt.Font("Franklin Gothic Demi", 1, 12)); // NOI18N
         name_label.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -125,12 +137,7 @@ public class AccountView extends javax.swing.JFrame {
         name_display.setFont(new java.awt.Font("Franklin Gothic Demi", 3, 12)); // NOI18N
         name_display.setForeground(new java.awt.Color(153, 153, 153));
         name_display.setRows(5);
-        name_display.setText("Not logged in...");
-        name_display.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                name_displayPropertyChange(evt);
-            }
-        });
+        name_display.setText(User.firstName);
         navPanel.add(name_display);
         name_display.setBounds(200, 40, 150, 15);
 
@@ -138,7 +145,7 @@ public class AccountView extends javax.swing.JFrame {
         username_display.setFont(new java.awt.Font("Franklin Gothic Demi", 3, 12)); // NOI18N
         username_display.setForeground(new java.awt.Color(153, 153, 153));
         username_display.setRows(5);
-        username_display.setText("Not logged in...");
+        username_display.setText(User.userName);
         username_display.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 username_displayPropertyChange(evt);
@@ -162,7 +169,7 @@ public class AccountView extends javax.swing.JFrame {
             }
         });
         navPanel.add(not_logged_in_button);
-        not_logged_in_button.setBounds(100, 110, 131, 23);
+        not_logged_in_button.setBounds(100, 110, 131, 22);
 
         noAccount_label.setFont(new java.awt.Font("Franklin Gothic Demi", 1, 12)); // NOI18N
         noAccount_label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -179,25 +186,30 @@ public class AccountView extends javax.swing.JFrame {
             }
         });
         navPanel.add(createAccount_button);
-        createAccount_button.setBounds(240, 110, 133, 23);
+        createAccount_button.setBounds(240, 110, 133, 22);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(navPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(605, 605, 605)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(viewPanel)
+                    .addComponent(navPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(navPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(161, Short.MAX_VALUE))
+                    .addComponent(viewPanel)))
         );
 
         pack();
@@ -205,68 +217,33 @@ public class AccountView extends javax.swing.JFrame {
 
     private void createAccount_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccount_buttonActionPerformed
         // TODO add your handling code here:
-        CreateAccount new_account = new CreateAccount();
-        new_account.setVisible(true);
-        this.setVisible(false);
+        Cart_Mart_2.changeView(4, 9);
+        //CreateAccount new_account = new CreateAccount();
+        //new_account.setVisible(true);
+        //this.setVisible(false);
     }//GEN-LAST:event_createAccount_buttonActionPerformed
 
     private void not_logged_in_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_not_logged_in_buttonActionPerformed
         // TODO add your handling code here:
-        loginView new_account = new loginView();
-        new_account.setVisible(true);
-        this.setVisible(false);
+        Cart_Mart_2.changeView(5, 9);
+        //loginView new_account = new loginView();
+        //new_account.setVisible(true);
+        //this.setVisible(false);
     }//GEN-LAST:event_not_logged_in_buttonActionPerformed
-
-    private void name_displayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_name_displayPropertyChange
-        // TODO add your handling code here:
-        String customer_file = "C:\\Users\\harks\\Documents\\NetBeansProjects\\CartMart\\Customer_Data.txt";
-        User curr_user = new User();
-        String username = "";
-        
-        username = User.userName;
-        
-        try {
-            File customer = new File(customer_file);
-            
-//            FileReader fr = new FileReader(customer_file);
-            
-            
-//            File file = new File("C:\\Users\\harks\\Documents\\NetBeansProjects\\CartMart\\Customer_Data.txt");
-            Scanner sc = new Scanner(customer).useDelimiter(",");
-            username = sc.next();
-            name_display.append(username);
-//        
-//            while (sc.hasNextLine()) 
-//                System.out.println(sc.nextLine()); 
-        }
-        catch(IOException ex) {
-            Logger.getLogger(CreateAccount.class.getName()).log(Level.SEVERE,null,ex);
-        }
-    }//GEN-LAST:event_name_displayPropertyChange
 
     private void username_displayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_username_displayPropertyChange
         // TODO add your handling code here:
     }//GEN-LAST:event_username_displayPropertyChange
 
-    private void ShopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShopActionPerformed
-        // TODO add your handling code here:
-        MainGUIFrame new_account = new MainGUIFrame();
-        new_account.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_ShopActionPerformed
-
     private void Welcome_PageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Welcome_PageActionPerformed
         // TODO add your handling code here:
-        WelcomePage new_account = new WelcomePage();
-        new_account.setVisible(true);
-        this.setVisible(false);
+        Cart_Mart_2.changeView(6, 9);
+        //WelcomePage new_account = new WelcomePage();
+        //new_account.setVisible(true);
+        //this.setVisible(false);
     }//GEN-LAST:event_Welcome_PageActionPerformed
 
-//        public static String readJsonFromFile(String fileName) throws FileNotFoundException, IOException {
-//        Path path = Paths.get(fileName);
-//        String jsonText = Files.readString(path, Charset.forName("UTF-8"));
-//        return jsonText;
-    
+
     /**
      * @param args the command line arguments
      */
@@ -303,7 +280,6 @@ public class AccountView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Shop;
     private javax.swing.JButton Welcome_Page;
     private javax.swing.JButton createAccount_button;
     private javax.swing.JScrollPane jScrollPane1;
@@ -318,5 +294,6 @@ public class AccountView extends javax.swing.JFrame {
     private javax.swing.JLabel page_title;
     private javax.swing.JTextArea username_display;
     private javax.swing.JLabel username_label;
+    private javax.swing.JScrollPane viewPanel;
     // End of variables declaration//GEN-END:variables
 }

@@ -235,96 +235,88 @@ public class loginView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private String getUserName()
-    { 
+    private String getUserName() {
         String getName = txtUsername.getText() + ".txt";
         return getName;
-        
+
     }
-    
+
     private void login_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_buttonActionPerformed
         // TODO add your handling code here:
-        try{ 
-            if (user_info() == true)
-            { 
-                
-                JOptionPane.showMessageDialog(this,"successful");
+        try {
+            if (user_info() == true) {
+
+                JOptionPane.showMessageDialog(this, "successful");
                 // create user info
-                
-                Cart_Mart_2.changeView(6,5);
+
+                Cart_Mart_2.changeView(6, 5);
                 //WelcomePage welcome = new WelcomePage();
                 //welcome.setVisible(true);
                 //this.setVisible(false);
 
-                WelcomePage welcome = new WelcomePage();
-                welcome.setVisible(true);
-                this.setVisible(false);
+                //WelcomePage welcome = new WelcomePage();
+                //welcome.setVisible(true);
+                //this.setVisible(false);
                 //System.out.println(getUserName());
-                
-                 File newInput = new File(getUserName());
-        if (!newInput.exists()){ 
-            newInput.createNewFile();
-        }
-        BufferedReader br = new BufferedReader(new FileReader(newInput));
-        Object [] Lines = br.lines().toArray();
-        int counter = 0;
-        for (int i =0; i < Lines.length; i++){ 
-            String data_line = Lines[i].toString().trim();
-            String[] row = data_line.split(",");
-            counter = Integer.parseInt(row[0]) +1;
-        }
-        FileWriter fw = new FileWriter(newInput,true);
-        BufferedWriter bw = new BufferedWriter(fw);
-        PrintWriter pw = new PrintWriter(bw);
-        pw.println(counter+"," +txtUsername.getText());
-        pw.flush();
-        pw.close();
-        bw.close();
-                
+                /*File newInput = new File(getUserName());
+                if (!newInput.exists()) {
+                    newInput.createNewFile();
+                }
+                BufferedReader br = new BufferedReader(new FileReader(newInput));
+                Object[] Lines = br.lines().toArray();
+                int counter = 0;
+                for (int i = 0; i < Lines.length; i++) {
+                    String data_line = Lines[i].toString().trim();
+                    String[] row = data_line.split(",");
+                    counter = Integer.parseInt(row[0]) + 1;
+                }
+                FileWriter fw = new FileWriter(newInput, true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter pw = new PrintWriter(bw);
+                pw.println(counter + "," + txtUsername.getText());
+                pw.flush();
+                pw.close();
+                bw.close();*/
+
+            } else {
+                JOptionPane.showMessageDialog(this, "unsuccessful");
             }
-            else
-                JOptionPane.showMessageDialog(this,"unsuccessful");
-        }catch(IOException ex)
-        { 
-            
+        } catch (IOException ex) {
+
         }
-        
+
     }//GEN-LAST:event_login_buttonActionPerformed
 
-    public boolean user_info() throws IOException
-    { 
+    public boolean user_info() throws IOException {
         String currentLine;
         String data[];
         String delimiter = ",";
-        
+
         String tempU = txtUsername.getText();
         String tempP = txtPassword.getText();
-        if (tempU.equals("admin") && tempP.equals("admin")){
-                    System.out.println("manager");
-                    Cart_Mart_2.changeView(10, 5);
-                }
-        
-        try{
+        if (tempU.equals("admin") && tempP.equals("admin")) {
+            System.out.println("manager");
+            Cart_Mart_2.changeView(10, 5);
+        }
+
+        try {
             File input = new File("CustomerData.txt");
             FileReader fr = new FileReader(input);
             BufferedReader br = new BufferedReader(fr);
-            while((currentLine = br.readLine()) != null)
-            { 
+            while ((currentLine = br.readLine()) != null) {
                 data = currentLine.split(delimiter);
-                
-                if (data[3].equals(tempU) && data[4].equals(tempP))
-                        {
-                            User.createUser(data[1],data[2],data[3],data[4]);
-                            return true;
-                        }
-            }
-                }catch(Exception e)
-                { 
-                    
+
+                if (data[3].equals(tempU) && data[4].equals(tempP)) {
+                    User.createUser(data[1], data[2], data[3], data[4]);
+                    return true;
                 }
+            }
+        } catch (Exception e) {
+
+        }
         return false;
     }
-    
+
     private void create_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_buttonActionPerformed
         // TODO add your handling code here:
         Cart_Mart_2.changeView(4, 5);
@@ -335,16 +327,15 @@ public class loginView extends javax.swing.JFrame {
 
     private void continue_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continue_buttonActionPerformed
         // TODO add your handling code here:
-        Cart_Mart_2.changeView(6,5);
-        
+        Cart_Mart_2.changeView(6, 5);
+
         //WelcomePage welcome = new WelcomePage();
         //welcome.setVisible(true);
         //this.setVisible(false);
-        
-       // MainGUIFrame welcome = new MainGUIFrame();
-       // welcome.setVisible(true);
+        // MainGUIFrame welcome = new MainGUIFrame();
+        // welcome.setVisible(true);
         //this.setVisible(false);
-        
+
     }//GEN-LAST:event_continue_buttonActionPerformed
 
     /**

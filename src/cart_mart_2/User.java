@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class User {
 
     public static String receiptName = "";
-    private static String firstName = "David";
+    public static String firstName = "David";
     private static String lastName = "David";
     public static Boolean guest = true;
     public static String userName;

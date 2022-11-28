@@ -28,6 +28,12 @@ public class ViewItems extends JPanel{
      * @param inventory 
      */
     public void viewItemResults(ItemList inventory){
+        if (Cart_Mart_2.inAccount){
+                    AccountPanel accountPanel = new AccountPanel(AccountView.orderNumber,AccountView.orderDetails);
+                    accountPanel.setMaximumSize(new Dimension(715,50));
+                    add(accountPanel);
+                    return;
+                }
         for (int i = 0; i < inventory.getCount(); i++){
             // do not display an item that has a qty of 0
             if (inventory.getItem(i).getItemQuantity() != 0){
@@ -45,6 +51,7 @@ public class ViewItems extends JPanel{
                     receiptPanel.setMaximumSize(new Dimension(715,50));
                     add(receiptPanel);
                 }
+                
                 else{
                     ItemPanel itemPanel = new ItemPanel(itemNum, itemName, itemDesc, itemPrice, itemQty, orderQty);
                     add(itemPanel);

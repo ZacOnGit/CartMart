@@ -234,9 +234,9 @@ public class Delivery_Info extends javax.swing.JFrame {
                 //welcome.setVisible(true);
                 //this.setVisible(false);
 
-                MainGUIFrame frame = new MainGUIFrame();
-                frame.setVisible(true);
-                this.setVisible(false);
+                //MainGUIFrame frame = new MainGUIFrame();
+                //frame.setVisible(true);
+                //this.setVisible(false);
 
                 }
                 
@@ -253,9 +253,10 @@ public class Delivery_Info extends javax.swing.JFrame {
 
     private void welcomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_welcomePageActionPerformed
         // TODO add your handling code here:
-        WelcomePage welcome = new WelcomePage();
-        welcome.setVisible(true);
-        this.setVisible(false);
+        Cart_Mart_2.changeView(6, 8);
+        //WelcomePage welcome = new WelcomePage();
+        //welcome.setVisible(true);
+        //this.setVisible(false);
     }//GEN-LAST:event_welcomePageActionPerformed
 
      public boolean username_login() throws IOException

@@ -206,9 +206,10 @@ public class CreateAccount extends javax.swing.JFrame {
 
     private void getLoginPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getLoginPageActionPerformed
         // TODO add your handling code here:
-        loginView homepage = new loginView();
-        homepage.setVisible(true);
-        this.setVisible(false);
+        Cart_Mart_2.changeView(5,4);
+        //loginView homepage = new loginView();
+        //homepage.setVisible(true);
+        //this.setVisible(false);
     }//GEN-LAST:event_getLoginPageActionPerformed
 
    

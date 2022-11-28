@@ -13,42 +13,42 @@ import java.util.ArrayList;
  *
  * @author dcsv4
  */
-public class Order extends ItemList{
+public class Order extends ItemList {
+
     public static ArrayList<Integer> qtyList;
     public static ArrayList<Integer> itemIdList;
     public static String historyToSave;
     public static int orderNumber;
-    
-    public Order(){
+
+    public Order() {
         qtyList = new ArrayList<>();
         itemIdList = new ArrayList<>();
     }
-    
-    public void addItem(int itemNum, int qty){
+
+    public void addItem(int itemNum, int qty) {
         //itemList.add(item);
         qtyList.add(qty);
     }
-    
-    public Item getItem(int index){
+
+    public Item getItem(int index) {
         return itemList.get(index);
     }
-    
-    public int getQty(int index){
+
+    public int getQty(int index) {
         return qtyList.get(index);
     }
-    
-    public static void saveOrder(){
-        historyToSave = ReceiptPanel.orderForHistory.substring(0, ReceiptPanel.orderForHistory.length() - 1);
-        
-        
-        try(FileWriter fw = new FileWriter("src/cart_mart_2/resources/"+User.userName+".txt", true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter out = new PrintWriter(bw))
-        {
-            out.println(orderNumber + ":" + historyToSave);
-        } catch (Exception e) {
-            System.out.println("An unexpected error occured.");
+
+    public static void saveOrder() {
+        if (!Cart_Mart_2.oldOrder) {
+
+            historyToSave = ReceiptPanel.orderForHistory.substring(0, ReceiptPanel.orderForHistory.length() - 1);
+
+            try ( FileWriter fw = new FileWriter("src/cart_mart_2/resources/" + User.userName + ".txt", true);  BufferedWriter bw = new BufferedWriter(fw);  PrintWriter out = new PrintWriter(bw)) {
+                out.println(orderNumber + ":" + historyToSave);
+            } catch (Exception e) {
+                System.out.println("An unexpected error occured.");
+            }
+            //System.out.println(ReceiptPanel.orderForHistory);
         }
-        //System.out.println(ReceiptPanel.orderForHistory);
     }
 }
