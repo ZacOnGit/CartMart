@@ -84,6 +84,7 @@ public class Cart_Mart_2 {
             case 1:
                 switch (current) {
                     case 2:
+                        
                         cart.setVisible(false);
                         frame.setVisible(true);
                         break;
@@ -100,6 +101,8 @@ public class Cart_Mart_2 {
             case 2:
                 switch (current) {
                     case 1:
+                        oldOrder = false;
+                        inAccount = false;
                         cart = new CartView();
                         frame.setVisible(false);
                         cart.setVisible(true);
@@ -231,6 +234,8 @@ public class Cart_Mart_2 {
                 }
                 break;
             case 9:
+                Order.itemIdList.clear();
+                Order.qtyList.clear();
                 switch (current) {
                     case 1:
                         account = new AccountView();
