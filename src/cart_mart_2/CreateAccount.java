@@ -242,14 +242,14 @@ public class CreateAccount extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this,"successful");
                 User.createUser(txtFirstName.getText(),txtLastName.getText(),txtNewUsername.getText(),txtNewPassword.getText()); 
 
-                //Cart_Mart_2.changeView(6,4);
+                Cart_Mart_2.changeView(6,4);
                 //WelcomePage welcome = new WelcomePage();
                 //welcome.setVisible(true);
                 //this.setVisible(false);
 
-                WelcomePage welcome = new WelcomePage();
-                welcome.setVisible(true);
-                this.setVisible(false);
+                //WelcomePage welcome = new WelcomePage();
+                //welcome.setVisible(true);
+                //this.setVisible(false);
                 
         File newInput = new File(getUserName());
         if (!newInput.exists()){ 

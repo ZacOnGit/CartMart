@@ -133,6 +133,7 @@ public class Cart_Mart_2 {
                         receipt.setVisible(true);
                         break;
                     case 9:
+                        ReceiptView.orderTotal = 0;
                         account.setVisible(false);
                         inReceipt = true;
                         inAccount = false;
