@@ -22,7 +22,7 @@ public class ManagerView extends javax.swing.JFrame {
     ItemList inventory;
     
     /**
-     * Creates new form ManagerView
+     * Creates new form ManagerView. Initializes the ItemList from the .json file.
      * @throws java.lang.Exception
      */
     public ManagerView() throws Exception{
@@ -359,16 +359,21 @@ public class ManagerView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Switches panels from the main content panel to the Add Item panel
+     * @param evt 
+     */
     private void addItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addItemButtonActionPerformed
         // reverse visibility of panels to bring up Add Item menu
         contentPanel.setVisible(false);
         addItemPanel.setVisible(true);
     }//GEN-LAST:event_addItemButtonActionPerformed
-
+    /**
+     * Overrides the json file with the current inventory ItemList contents.
+     * @param evt 
+     */
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // Update by generating a new json file
-        // TODO: overwrite the real json
         String newJson = "[\n";
         for(int i = 0; i < inventory.getCount(); i++){
             Item item = inventory.getItem(i);
@@ -394,11 +399,17 @@ public class ManagerView extends javax.swing.JFrame {
             Logger.getLogger(ManagerView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_updateButtonActionPerformed
-
+    /**
+     * Closes the form.
+     * @param evt 
+     */
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
         this.dispose(); // close the application
     }//GEN-LAST:event_closeButtonActionPerformed
-
+    /**
+     * Fills in the fields containing item information each time a new item is selected.
+     * @param evt 
+     */
     private void itemComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemComboBoxActionPerformed
         // Retrieve item information and fill in GUI components
         Item item = inventory.getItem(itemComboBox.getSelectedItem().toString());
@@ -407,7 +418,10 @@ public class ManagerView extends javax.swing.JFrame {
         this.categoryTextField.setText(item.getItemCategory());
         this.descriptionTextField.setText(item.getItemDescription());
     }//GEN-LAST:event_itemComboBoxActionPerformed
-
+    /**
+     * Increases or decreases the item quantity of the currently selected combobox item.
+     * @param evt 
+     */
     private void itemCountSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_itemCountSpinnerStateChanged
         // Change currently selected item's quantity
         try {
@@ -417,9 +431,11 @@ public class ManagerView extends javax.swing.JFrame {
         }
         inventory.getItem(this.itemComboBox.getSelectedIndex()-1).setItemQuantity((Integer) this.itemCountSpinner.getValue());
     }//GEN-LAST:event_itemCountSpinnerStateChanged
-
+    /**
+     * Creates the new item with filled in GUI component values and adds it to the inventory
+     * @param evt 
+     */
     private void addToInventoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToInventoryButtonActionPerformed
-        // Create new item with filled in GUI component values and add it to the inventory
         int id = 0;
         for(int i = 0; i < inventory.getCount(); i++){
             int tempId = inventory.getItem(i).getItemId();
@@ -436,7 +452,10 @@ public class ManagerView extends javax.swing.JFrame {
         itemComboBox.addItem(newItem.getItemName());
         inventory.addItem(newItem);
     }//GEN-LAST:event_addToInventoryButtonActionPerformed
-
+    /**
+     * Revert from the Add Item panel back to the main content panel
+     * @param evt 
+     */
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // Reverse visibility of panels
         addItemPanel.setVisible(false);
