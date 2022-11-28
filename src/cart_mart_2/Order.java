@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author dcsv4
+ * @author david
  */
 public class Order extends ItemList {
 
@@ -20,24 +20,48 @@ public class Order extends ItemList {
     public static String historyToSave;
     public static int orderNumber;
 
+    /**
+     * Order is the object to maintain track of what the user adds to a cart
+     */
     public Order() {
         qtyList = new ArrayList<>();
         itemIdList = new ArrayList<>();
     }
 
+    /**
+     * addItem adds an item to the order
+     *
+     * @param itemNum
+     * @param qty
+     */
     public void addItem(int itemNum, int qty) {
-        //itemList.add(item);
         qtyList.add(qty);
     }
 
+    /**
+     * getItem returns the item ID of a specific item in the order
+     *
+     * @param index
+     * @return
+     */
     public Item getItem(int index) {
         return itemList.get(index);
     }
 
+    /**
+     * getQty returns the quantity of a specific item in the order
+     *
+     * @param index
+     * @return
+     */
     public int getQty(int index) {
         return qtyList.get(index);
     }
 
+    /**
+     * saveOrder saves the order to the customer data file so it can be
+     * retrieved and viewed at a later time
+     */
     public static void saveOrder() {
         if (!Cart_Mart_2.oldOrder) {
 
@@ -48,7 +72,6 @@ public class Order extends ItemList {
             } catch (Exception e) {
                 System.out.println("An unexpected error occured.");
             }
-            //System.out.println(ReceiptPanel.orderForHistory);
         }
     }
 }

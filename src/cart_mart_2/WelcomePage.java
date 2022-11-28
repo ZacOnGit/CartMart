@@ -258,24 +258,15 @@ public class WelcomePage extends javax.swing.JFrame {
     private void PickUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PickUpActionPerformed
         // TODO add your handling code here:
         Cart_Mart_2.changeView(7, 6);
-        //PickUp pick_up = new PickUp();
-        //pick_up.setVisible(true);
-        //this.setVisible(false);
     }//GEN-LAST:event_PickUpActionPerformed
 
     private void Delivery1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Delivery1ActionPerformed
         // TODO add your handling code here:
         Cart_Mart_2.changeView(8, 6);
-        //Delivery_Info delivery = new Delivery_Info();
-        //delivery.setVisible(true);
-        //this.setVisible(false);
     }//GEN-LAST:event_Delivery1ActionPerformed
 
     private void accountButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountButton1ActionPerformed
         // TODO add your handling code here:
-        //loginView info = new loginView();
-        //info.setVisible(true);
-        //this.setVisible(false);
         Cart_Mart_2.changeView(5, 6);
     }//GEN-LAST:event_accountButton1ActionPerformed
 

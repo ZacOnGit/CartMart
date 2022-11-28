@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author dcsv4
+ * @author david
  */
 public class User {
 
@@ -25,35 +25,41 @@ public class User {
     private static int outputFileLine;
     public static Boolean delivery = false;
 
+    /**
+     * a User is created each time the software is used to track account data
+     *
+     * @param fn
+     * @param ln
+     * @param un
+     * @param pw
+     */
     public static void createUser(String fn, String ln, String un, String pw) {
         firstName = fn;
         lastName = ln;
         guest = false;
         userName = un;
         passWord = pw;
-        if (!guest) 
+        if (!guest) {
             receiptName = firstName;
-        try{
-            
-            File history = new File("src/cart_mart_2/resources/"+un+".txt");
-            if (!history.exists())
+        }
+        try {
+
+            File history = new File("src/cart_mart_2/resources/" + un + ".txt");
+            if (!history.exists()) {
                 history.createNewFile();
-        }
-        catch(Exception e){
-            
+            }
+        } catch (Exception e) {
+
         }
     }
 
-    public void saveToHistory() {
-
-    }
-    public static void setLine(int number){
-        outputFileLine = number;
-    }
-    public static int getLine(){
-        return outputFileLine;
-    }
-    public static void setContact(String a, String p){
+    /**
+     * setContact saves the contact info for delivery
+     *
+     * @param a
+     * @param p
+     */
+    public static void setContact(String a, String p) {
         address = a;
         phone = p;
     }
