@@ -65,16 +65,16 @@ public class Cart_Mart_2 {
     /**
      * got in too deep before realizing that we really needed an observer so
      * went this route views: 
-     *  1: MainGUIFrame: ViewItems: ItemPanel 
-     *  2: CartView
-     *  3: ReceiptView 
-     *  4: CreateAccount 
-     *  5: LoginView 
-     *  6: WelcomePage 
-     *  7: PickUp 
-     *  8: Delivery_Info 
-     *  9: AccountView 
-     *  10:Mgr application
+     * 1: MainGUIFrame: ViewItems: ItemPanel 
+     * 2: CartView
+     * 3: ReceiptView 
+     * 4: CreateAccount 
+     * 5: LoginView 
+     * 6: WelcomePage 
+     * 7: PickUp 
+     * 8: Delivery_Info 
+     * 9: AccountView 
+     * 10:Mgr application
      *
      * @param current
      * @param next
@@ -84,7 +84,7 @@ public class Cart_Mart_2 {
             case 1:
                 switch (current) {
                     case 2:
-                        
+
                         cart.setVisible(false);
                         frame.setVisible(true);
                         break;
@@ -133,6 +133,7 @@ public class Cart_Mart_2 {
                         receipt.setVisible(true);
                         break;
                     case 9:
+                        ReceiptView.orderTotal = 0;
                         account.setVisible(false);
                         inReceipt = true;
                         inAccount = false;
@@ -242,7 +243,7 @@ public class Cart_Mart_2 {
                         frame.setVisible(false);
                         account.setVisible(true);
                         break;
-                    case 3: 
+                    case 3:
                         account = new AccountView();
                         receipt.setVisible(false);
                         account.setVisible(true);

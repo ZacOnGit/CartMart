@@ -11,16 +11,19 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author dcsv4
+ * @author david
  */
 public class ReceiptView extends javax.swing.JFrame {
+
     private ItemList inventory;
     private ItemList order;
     public int orderNumber = 0;
     public static int orderTotal = 0;
 
     /**
-     * Creates new form ReceiptView
+     * Creates new form ReceiptView. Overloaded constructor is to display order
+     * history as an order number is not needed
+     *
      * @param list
      */
     public ReceiptView(ItemList list) {
@@ -38,26 +41,26 @@ public class ReceiptView extends javax.swing.JFrame {
         itemPanel.viewItemResults(list);
         Cart_Mart_2.printOrder();
         this.revalidate();
-        totalLabel.setText("Total: $"+String.format("%.2f", (float)orderTotal/100.0));
+        totalLabel.setText("Total: $" + String.format("%.2f", (float) orderTotal / 100.0));
         viewPanel.setBackground(Color.GREEN);
         viewPanel.setViewportView(itemPanel);
         viewPanel.setVisible(true);
         itemPanel.setVisible(true);
     }
-    public ReceiptView(){
+
+    public ReceiptView() {
         this.inventory = Item.inventory;
         order = new ItemList();
-        //System.out.println(Order.itemIdList.size());
-        for (int i = 0; i < Order.itemIdList.size(); i++){
-            for (int j = 0; j < inventory.getCount(); j++){
-                if (Order.itemIdList.get(i) == inventory.getItem(j).getItemId()){                    
+        for (int i = 0; i < Order.itemIdList.size(); i++) {
+            for (int j = 0; j < inventory.getCount(); j++) {
+                if (Order.itemIdList.get(i) == inventory.getItem(j).getItemId()) {
                     order.addItem(inventory.getItem(j));
                 }
             }
-        } 
-        for (int i = 0; i < order.getCount() - 1; i++){
-            for (int j = i + 1; j < order.getCount(); j ++){
-                if (order.getItem(i).getItemId() == order.getItem(j).getItemId()){
+        }
+        for (int i = 0; i < order.getCount() - 1; i++) {
+            for (int j = i + 1; j < order.getCount(); j++) {
+                if (order.getItem(i).getItemId() == order.getItem(j).getItemId()) {
                     order.removeItem(i);
                     Order.itemIdList.remove(i);
                     Order.qtyList.remove(i);
@@ -68,7 +71,7 @@ public class ReceiptView extends javax.swing.JFrame {
         this.setIconImage(logo.getImage());
         this.setTitle("Cart Mart");
         initComponents();
-        
+
         ViewItems itemPanel = new ViewItems();
         itemPanel.viewItemResults(order);
         viewPanel.setBackground(Color.GREEN);
@@ -76,10 +79,12 @@ public class ReceiptView extends javax.swing.JFrame {
         viewPanel.setVisible(true);
         itemPanel.setVisible(true);
     }
-    public void turnOn(){
+
+    public void turnOn() {
         this.getContentPane().setBackground(Color.black);
         this.setVisible(true);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -158,7 +163,7 @@ public class ReceiptView extends javax.swing.JFrame {
 
     private void accountButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountButton1ActionPerformed
         // TODO add your handling code here:
-        Cart_Mart_2.changeView(9,3);
+        Cart_Mart_2.changeView(9, 3);
     }//GEN-LAST:event_accountButton1ActionPerformed
 
     /**
@@ -195,7 +200,6 @@ public class ReceiptView extends javax.swing.JFrame {
             }
         });
     }
-    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

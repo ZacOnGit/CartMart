@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author dcsv4
+ * @author david
  */
 public class MainGUIFrame extends javax.swing.JFrame {
     private ItemList inventory;

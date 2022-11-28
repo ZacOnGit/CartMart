@@ -11,11 +11,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 
 /**
  *
- * @author dcsv4
+ * @author david
  */
 public class ItemPanel extends JPanel {
 
@@ -23,6 +22,17 @@ public class ItemPanel extends JPanel {
     public static int cartCount = 0;
     private static Order order;
 
+    /**
+     * constructor is called to create a new JPanel for each item to be
+     * displayed
+     *
+     * @param itemNum
+     * @param itemName
+     * @param itemDesc
+     * @param itemPrice
+     * @param itemQty
+     * @param orderQty
+     */
     public ItemPanel(int itemNum, String itemName, String itemDesc, int itemPrice, int itemQty, int orderQty) {
         JLabel image = new javax.swing.JLabel();
         JLabel name = new javax.swing.JLabel();
@@ -104,7 +114,6 @@ public class ItemPanel extends JPanel {
         addToCart.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                //System.out.println(itemNum);
                 if (Integer.valueOf(quantity.getText()) != 0) {
                     Boolean itemInCart = false;
                     for (int i = 0; i < order.itemIdList.size(); i++) {
@@ -184,6 +193,14 @@ public class ItemPanel extends JPanel {
 
     }
 
+    /**
+     * this function increases the number in the quantity field by 1 for each
+     * click
+     *
+     * @param evt
+     * @param num
+     * @return
+     */
     private int incButtonMouseClicked(java.awt.event.MouseEvent evt, int num) {
         if (num == itemQuantity) {
             JOptionPane.showMessageDialog(null, String.valueOf(num) + " is the maximum allowed.");
@@ -193,6 +210,14 @@ public class ItemPanel extends JPanel {
         return num;
     }
 
+    /**
+     * this function decreases the number in the quantity field by 1 for each
+     * click
+     *
+     * @param evt
+     * @param num
+     * @return
+     */
     private int decButtonMouseClicked(java.awt.event.MouseEvent evt, int num) {
         if (num == 0) {
             return num;

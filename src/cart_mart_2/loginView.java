@@ -5,14 +5,9 @@
 package cart_mart_2;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Scanner;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -234,6 +229,12 @@ public class loginView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+/**
+     * the function getUserName() will get the username and add a .txt to make
+     * it into a text file in another function
+     *
+     * @return
+     */
 
     private String getUserName() {
         String getName = txtUsername.getText() + ".txt";
@@ -241,42 +242,20 @@ public class loginView extends javax.swing.JFrame {
 
     }
 
+    /**
+     * this button will make sure if the login is successful or not. If the
+     * password or username entered is incorrect, it will display a message
+     *
+     * @param evt
+     */
     private void login_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_buttonActionPerformed
         // TODO add your handling code here:
         try {
             if (user_info() == true) {
 
                 JOptionPane.showMessageDialog(this, "successful");
-                // create user info
 
                 Cart_Mart_2.changeView(6, 5);
-                //WelcomePage welcome = new WelcomePage();
-                //welcome.setVisible(true);
-                //this.setVisible(false);
-
-                //WelcomePage welcome = new WelcomePage();
-                //welcome.setVisible(true);
-                //this.setVisible(false);
-                //System.out.println(getUserName());
-                /*File newInput = new File(getUserName());
-                if (!newInput.exists()) {
-                    newInput.createNewFile();
-                }
-                BufferedReader br = new BufferedReader(new FileReader(newInput));
-                Object[] Lines = br.lines().toArray();
-                int counter = 0;
-                for (int i = 0; i < Lines.length; i++) {
-                    String data_line = Lines[i].toString().trim();
-                    String[] row = data_line.split(",");
-                    counter = Integer.parseInt(row[0]) + 1;
-                }
-                FileWriter fw = new FileWriter(newInput, true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter pw = new PrintWriter(bw);
-                pw.println(counter + "," + txtUsername.getText());
-                pw.flush();
-                pw.close();
-                bw.close();*/
 
             } else {
                 JOptionPane.showMessageDialog(this, "unsuccessful");
@@ -286,7 +265,13 @@ public class loginView extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_login_buttonActionPerformed
-
+    /**
+     * the function user_info() will make sure the username is not repeated
+     * again from checking the files
+     *
+     * @return
+     * @throws IOException
+     */
     public boolean user_info() throws IOException {
         String currentLine;
         String data[];
@@ -320,21 +305,11 @@ public class loginView extends javax.swing.JFrame {
     private void create_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_buttonActionPerformed
         // TODO add your handling code here:
         Cart_Mart_2.changeView(4, 5);
-        //CreateAccount new_account = new CreateAccount();
-        //new_account.setVisible(true);
-        //this.setVisible(false);
     }//GEN-LAST:event_create_buttonActionPerformed
 
     private void continue_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continue_buttonActionPerformed
         // TODO add your handling code here:
         Cart_Mart_2.changeView(6, 5);
-
-        //WelcomePage welcome = new WelcomePage();
-        //welcome.setVisible(true);
-        //this.setVisible(false);
-        // MainGUIFrame welcome = new MainGUIFrame();
-        // welcome.setVisible(true);
-        //this.setVisible(false);
 
     }//GEN-LAST:event_continue_buttonActionPerformed
 

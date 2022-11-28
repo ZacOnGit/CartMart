@@ -207,17 +207,11 @@ public class PickUp extends javax.swing.JFrame {
     private void placeOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placeOrderActionPerformed
         // TODO add your handling code here:
         Cart_Mart_2.changeView(1,7);
-        //MainGUIFrame frame = new MainGUIFrame();
-        //frame.setVisible(true);
-        //this.setVisible(false);
     }//GEN-LAST:event_placeOrderActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         Cart_Mart_2.changeView(8,7);
-        //Delivery_Info delivery = new Delivery_Info();
-        //delivery.setVisible(true);
-        //this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
